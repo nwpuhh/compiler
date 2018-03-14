@@ -1,0 +1,3 @@
+int go, ga = 5
+main
+
