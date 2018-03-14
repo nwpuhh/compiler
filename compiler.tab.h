@@ -61,7 +61,9 @@ extern int yydebug;
     tLEFTBRACKET = 271,
     tRIGHTBRACKET = 272,
     tSEMI = 273,
-    tVAR = 274
+    tCOMMA = 274,
+    tVAR = 275,
+    tRETURN = 276
   };
 #endif
 

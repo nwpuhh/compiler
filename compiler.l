@@ -7,7 +7,8 @@
 "main"	return tMAIN;
 "printf"	return tPRINTF;
 "{"		return tLEFTBRACE;
-"}"		return tRIGHTBRACE;  
+"}"		return tRIGHTBRACE;
+"return" 	return tRETURN;  
 [-]?[0-9]+(e[0-9]+)?	return tINT;
 (" "|\t|\n)+		;
 [-]?[0-9]+.[0-9]+		return tFLOAT;
