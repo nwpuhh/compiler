@@ -1,9 +1,9 @@
-#include <stdio.h>
-
-int main()
-{
-	int a1b1 = 5;
-	int b = +5;
-
-	printf("a is %d; b is %d\n", a1b1, b);
+main(){
+	int i,j,k,r;
+	i=3;
+	j=4;
+	k=8;
+	printf(i);
+	r=(i+j)*(i+k/j);
+	printf(r);
 }

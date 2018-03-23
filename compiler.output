@@ -18,7 +18,7 @@ Grammaire
 
     6 var: %empty
     7    | tCOMMA tVAR var
-    8    | tEQ value
+    8    | tEQ expression_alg
 
     9 value: tINT
    10      | tFLOAT
@@ -26,34 +26,37 @@ Grammaire
 
    12 declarationFun: declaration tLEFTBRACKET params tRIGHTBRACKET body
    13               | tMAIN tLEFTBRACKET params tRIGHTBRACKET body
+   14               | declaration tLEFTBRACKET params tRIGHTBRACKET tSEMI
 
-   14 params: %empty
-   15       | param suiteparams
+   15 params: %empty
+   16       | declaration suiteparamsdecla
+   17       | tVAR suiteparams
 
-   16 param: declaration
+   18 suiteparamsdecla: %empty
+   19                 | declaration tCOMMA suiteparamsdecla
 
-   17 suiteparams: %empty
-   18            | tCOMMA param suiteparams
+   20 suiteparams: %empty
+   21            | tCOMMA tVAR suiteparams
 
-   19 body: tLEFTBRACE expressions tRIGHTBRACE
+   22 body: tLEFTBRACE expressions tRIGHTBRACE
 
-   20 expressions: expression tSEMI expressions
-   21            | %empty
+   23 expressions: expression tSEMI expressions
+   24            | %empty
 
-   22 expression: tVAR tEQ equation
-   23           | declarationVar
-   24           | call
+   25 expression: tVAR tEQ expression_alg
+   26           | declarationVar
+   27           | call
 
-   25 equation: equation tADD equation
-   26         | equation tMIN equation
-   27         | equation tDIV equation
-   28         | equation tMUL equation
-   29         | tLEFTBRACKET equation tRIGHTBRACKET
-   30         | value
-   31         | tVAR
+   28 expression_alg: expression_alg tADD expression_alg
+   29               | expression_alg tMIN expression_alg
+   30               | expression_alg tDIV expression_alg
+   31               | expression_alg tMUL expression_alg
+   32               | tLEFTBRACKET expression_alg tRIGHTBRACKET
+   33               | value
+   34               | tVAR
 
-   32 call: tVAR tLEFTBRACKET params tRIGHTBRACKET
-   33     | tPRINTF tLEFTBRACKET params tRIGHTBRACKET
+   35 call: tVAR tLEFTBRACKET params tRIGHTBRACKET
+   36     | tPRINTF tLEFTBRACKET params tRIGHTBRACKET
 
 
 Terminaux, suivis des règles où ils apparaissent
@@ -61,23 +64,23 @@ Terminaux, suivis des règles où ils apparaissent
 $end (0) 0
 error (256)
 tMAIN (258) 13
-tPRINTF (259) 33
-tLEFTBRACE (260) 19
-tRIGHTBRACE (261) 19
+tPRINTF (259) 36
+tLEFTBRACE (260) 22
+tRIGHTBRACE (261) 22
 tINT (262) 9
 tFLOAT (263) 10
 tCONST (264)
 tTYPE (265) 4
-tADD (266) 25
-tMIN (267) 26
-tMUL (268) 28
-tDIV (269) 27
-tEQ (270) 8 22
-tLEFTBRACKET (271) 12 13 29 32 33
-tRIGHTBRACKET (272) 12 13 29 32 33
-tSEMI (273) 20
-tCOMMA (274) 7 18
-tVAR (275) 4 7 22 31 32
+tADD (266) 28
+tMIN (267) 29
+tMUL (268) 31
+tDIV (269) 30
+tEQ (270) 8 25
+tLEFTBRACKET (271) 12 13 14 32 35 36
+tRIGHTBRACKET (272) 12 13 14 32 35 36
+tSEMI (273) 14 23
+tCOMMA (274) 7 19 21
+tVAR (275) 4 7 17 21 25 34 35
 tRETURN (276)
 
 
@@ -88,31 +91,31 @@ $accept (22)
 S (23)
     à gauche: 1 2 3, à droite: 0 2 3
 declaration (24)
-    à gauche: 4, à droite: 5 12 16
+    à gauche: 4, à droite: 5 12 14 16 19
 declarationVar (25)
-    à gauche: 5, à droite: 2 23
+    à gauche: 5, à droite: 2 26
 var (26)
     à gauche: 6 7 8, à droite: 5 7
 value (27)
-    à gauche: 9 10 11, à droite: 8 30
+    à gauche: 9 10 11, à droite: 33
 declarationFun (28)
-    à gauche: 12 13, à droite: 3
+    à gauche: 12 13 14, à droite: 3
 params (29)
-    à gauche: 14 15, à droite: 12 13 32 33
-param (30)
-    à gauche: 16, à droite: 15 18
+    à gauche: 15 16 17, à droite: 12 13 14 35 36
+suiteparamsdecla (30)
+    à gauche: 18 19, à droite: 16 19
 suiteparams (31)
-    à gauche: 17 18, à droite: 15 18
+    à gauche: 20 21, à droite: 17 21
 body (32)
-    à gauche: 19, à droite: 12 13
+    à gauche: 22, à droite: 12 13
 expressions (33)
-    à gauche: 20 21, à droite: 19 20
+    à gauche: 23 24, à droite: 22 23
 expression (34)
-    à gauche: 22 23 24, à droite: 20
-equation (35)
-    à gauche: 25 26 27 28 29 30 31, à droite: 22 25 26 27 28 29
+    à gauche: 25 26 27, à droite: 23
+expression_alg (35)
+    à gauche: 28 29 30 31 32 33 34, à droite: 8 25 28 29 30 31 32
 call (36)
-    à gauche: 32 33, à droite: 11 24
+    à gauche: 35 36, à droite: 11 27
 
 
 État 0
@@ -155,6 +158,7 @@ call (36)
 
     5 declarationVar: declaration . var
    12 declarationFun: declaration . tLEFTBRACKET params tRIGHTBRACKET body
+   14               | declaration . tLEFTBRACKET params tRIGHTBRACKET tSEMI
 
     tEQ           décalage et aller à l'état 10
     tLEFTBRACKET  décalage et aller à l'état 11
@@ -200,12 +204,12 @@ call (36)
    13 declarationFun: tMAIN tLEFTBRACKET . params tRIGHTBRACKET body
 
     tTYPE  décalage et aller à l'état 2
+    tVAR   décalage et aller à l'état 16
 
-    $défaut  réduction par utilisation de la règle 14 (params)
+    $défaut  réduction par utilisation de la règle 15 (params)
 
-    declaration  aller à l'état 16
-    params       aller à l'état 17
-    param        aller à l'état 18
+    declaration  aller à l'état 17
+    params       aller à l'état 18
 
 
 État 8
@@ -224,35 +228,38 @@ call (36)
 
 État 10
 
-    8 var: tEQ . value
+    8 var: tEQ . expression_alg
 
-    tPRINTF  décalage et aller à l'état 19
-    tINT     décalage et aller à l'état 20
-    tFLOAT   décalage et aller à l'état 21
-    tVAR     décalage et aller à l'état 22
+    tPRINTF       décalage et aller à l'état 19
+    tINT          décalage et aller à l'état 20
+    tFLOAT        décalage et aller à l'état 21
+    tLEFTBRACKET  décalage et aller à l'état 22
+    tVAR          décalage et aller à l'état 23
 
-    value  aller à l'état 23
-    call   aller à l'état 24
+    value           aller à l'état 24
+    expression_alg  aller à l'état 25
+    call            aller à l'état 26
 
 
 État 11
 
    12 declarationFun: declaration tLEFTBRACKET . params tRIGHTBRACKET body
+   14               | declaration tLEFTBRACKET . params tRIGHTBRACKET tSEMI
 
     tTYPE  décalage et aller à l'état 2
+    tVAR   décalage et aller à l'état 16
 
-    $défaut  réduction par utilisation de la règle 14 (params)
+    $défaut  réduction par utilisation de la règle 15 (params)
 
-    declaration  aller à l'état 16
-    params       aller à l'état 25
-    param        aller à l'état 18
+    declaration  aller à l'état 17
+    params       aller à l'état 27
 
 
 État 12
 
     7 var: tCOMMA . tVAR var
 
-    tVAR  décalage et aller à l'état 26
+    tVAR  décalage et aller à l'état 28
 
 
 État 13
@@ -278,34 +285,39 @@ call (36)
 
 État 16
 
-   16 param: declaration .
+   17 params: tVAR . suiteparams
 
-    $défaut  réduction par utilisation de la règle 16 (param)
+    tCOMMA  décalage et aller à l'état 29
+
+    $défaut  réduction par utilisation de la règle 20 (suiteparams)
+
+    suiteparams  aller à l'état 30
 
 
 État 17
 
-   13 declarationFun: tMAIN tLEFTBRACKET params . tRIGHTBRACKET body
+   16 params: declaration . suiteparamsdecla
 
-    tRIGHTBRACKET  décalage et aller à l'état 27
+    tTYPE  décalage et aller à l'état 2
+
+    $défaut  réduction par utilisation de la règle 18 (suiteparamsdecla)
+
+    declaration       aller à l'état 31
+    suiteparamsdecla  aller à l'état 32
 
 
 État 18
 
-   15 params: param . suiteparams
+   13 declarationFun: tMAIN tLEFTBRACKET params . tRIGHTBRACKET body
 
-    tCOMMA  décalage et aller à l'état 28
-
-    $défaut  réduction par utilisation de la règle 17 (suiteparams)
-
-    suiteparams  aller à l'état 29
+    tRIGHTBRACKET  décalage et aller à l'état 33
 
 
 État 19
 
-   33 call: tPRINTF . tLEFTBRACKET params tRIGHTBRACKET
+   36 call: tPRINTF . tLEFTBRACKET params tRIGHTBRACKET
 
-    tLEFTBRACKET  décalage et aller à l'état 30
+    tLEFTBRACKET  décalage et aller à l'état 34
 
 
 État 20
@@ -324,33 +336,68 @@ call (36)
 
 État 22
 
-   32 call: tVAR . tLEFTBRACKET params tRIGHTBRACKET
+   32 expression_alg: tLEFTBRACKET . expression_alg tRIGHTBRACKET
 
-    tLEFTBRACKET  décalage et aller à l'état 31
+    tPRINTF       décalage et aller à l'état 19
+    tINT          décalage et aller à l'état 20
+    tFLOAT        décalage et aller à l'état 21
+    tLEFTBRACKET  décalage et aller à l'état 22
+    tVAR          décalage et aller à l'état 23
+
+    value           aller à l'état 24
+    expression_alg  aller à l'état 35
+    call            aller à l'état 26
 
 
 État 23
 
-    8 var: tEQ value .
+   34 expression_alg: tVAR .
+   35 call: tVAR . tLEFTBRACKET params tRIGHTBRACKET
+
+    tLEFTBRACKET  décalage et aller à l'état 36
+
+    $défaut  réduction par utilisation de la règle 34 (expression_alg)
+
+
+État 24
+
+   33 expression_alg: value .
+
+    $défaut  réduction par utilisation de la règle 33 (expression_alg)
+
+
+État 25
+
+    8 var: tEQ expression_alg .
+   28 expression_alg: expression_alg . tADD expression_alg
+   29               | expression_alg . tMIN expression_alg
+   30               | expression_alg . tDIV expression_alg
+   31               | expression_alg . tMUL expression_alg
+
+    tADD  décalage et aller à l'état 37
+    tMIN  décalage et aller à l'état 38
+    tMUL  décalage et aller à l'état 39
+    tDIV  décalage et aller à l'état 40
 
     $défaut  réduction par utilisation de la règle 8 (var)
 
 
-État 24
+État 26
 
    11 value: call .
 
     $défaut  réduction par utilisation de la règle 11 (value)
 
 
-État 25
+État 27
 
    12 declarationFun: declaration tLEFTBRACKET params . tRIGHTBRACKET body
+   14               | declaration tLEFTBRACKET params . tRIGHTBRACKET tSEMI
 
-    tRIGHTBRACKET  décalage et aller à l'état 32
+    tRIGHTBRACKET  décalage et aller à l'état 41
 
 
-État 26
+État 28
 
     7 var: tCOMMA tVAR . var
 
@@ -359,143 +406,321 @@ call (36)
 
     $défaut  réduction par utilisation de la règle 6 (var)
 
-    var  aller à l'état 33
-
-
-État 27
-
-   13 declarationFun: tMAIN tLEFTBRACKET params tRIGHTBRACKET . body
-
-    tLEFTBRACE  décalage et aller à l'état 34
-
-    body  aller à l'état 35
-
-
-État 28
-
-   18 suiteparams: tCOMMA . param suiteparams
-
-    tTYPE  décalage et aller à l'état 2
-
-    declaration  aller à l'état 16
-    param        aller à l'état 36
+    var  aller à l'état 42
 
 
 État 29
 
-   15 params: param suiteparams .
+   21 suiteparams: tCOMMA . tVAR suiteparams
 
-    $défaut  réduction par utilisation de la règle 15 (params)
+    tVAR  décalage et aller à l'état 43
 
 
 État 30
 
-   33 call: tPRINTF tLEFTBRACKET . params tRIGHTBRACKET
+   17 params: tVAR suiteparams .
 
-    tTYPE  décalage et aller à l'état 2
-
-    $défaut  réduction par utilisation de la règle 14 (params)
-
-    declaration  aller à l'état 16
-    params       aller à l'état 37
-    param        aller à l'état 18
+    $défaut  réduction par utilisation de la règle 17 (params)
 
 
 État 31
 
-   32 call: tVAR tLEFTBRACKET . params tRIGHTBRACKET
+   19 suiteparamsdecla: declaration . tCOMMA suiteparamsdecla
 
-    tTYPE  décalage et aller à l'état 2
-
-    $défaut  réduction par utilisation de la règle 14 (params)
-
-    declaration  aller à l'état 16
-    params       aller à l'état 38
-    param        aller à l'état 18
+    tCOMMA  décalage et aller à l'état 44
 
 
 État 32
 
-   12 declarationFun: declaration tLEFTBRACKET params tRIGHTBRACKET . body
+   16 params: declaration suiteparamsdecla .
 
-    tLEFTBRACE  décalage et aller à l'état 34
-
-    body  aller à l'état 39
+    $défaut  réduction par utilisation de la règle 16 (params)
 
 
 État 33
+
+   13 declarationFun: tMAIN tLEFTBRACKET params tRIGHTBRACKET . body
+
+    tLEFTBRACE  décalage et aller à l'état 45
+
+    body  aller à l'état 46
+
+
+État 34
+
+   36 call: tPRINTF tLEFTBRACKET . params tRIGHTBRACKET
+
+    tTYPE  décalage et aller à l'état 2
+    tVAR   décalage et aller à l'état 16
+
+    $défaut  réduction par utilisation de la règle 15 (params)
+
+    declaration  aller à l'état 17
+    params       aller à l'état 47
+
+
+État 35
+
+   28 expression_alg: expression_alg . tADD expression_alg
+   29               | expression_alg . tMIN expression_alg
+   30               | expression_alg . tDIV expression_alg
+   31               | expression_alg . tMUL expression_alg
+   32               | tLEFTBRACKET expression_alg . tRIGHTBRACKET
+
+    tADD           décalage et aller à l'état 37
+    tMIN           décalage et aller à l'état 38
+    tMUL           décalage et aller à l'état 39
+    tDIV           décalage et aller à l'état 40
+    tRIGHTBRACKET  décalage et aller à l'état 48
+
+
+État 36
+
+   35 call: tVAR tLEFTBRACKET . params tRIGHTBRACKET
+
+    tTYPE  décalage et aller à l'état 2
+    tVAR   décalage et aller à l'état 16
+
+    $défaut  réduction par utilisation de la règle 15 (params)
+
+    declaration  aller à l'état 17
+    params       aller à l'état 49
+
+
+État 37
+
+   28 expression_alg: expression_alg tADD . expression_alg
+
+    tPRINTF       décalage et aller à l'état 19
+    tINT          décalage et aller à l'état 20
+    tFLOAT        décalage et aller à l'état 21
+    tLEFTBRACKET  décalage et aller à l'état 22
+    tVAR          décalage et aller à l'état 23
+
+    value           aller à l'état 24
+    expression_alg  aller à l'état 50
+    call            aller à l'état 26
+
+
+État 38
+
+   29 expression_alg: expression_alg tMIN . expression_alg
+
+    tPRINTF       décalage et aller à l'état 19
+    tINT          décalage et aller à l'état 20
+    tFLOAT        décalage et aller à l'état 21
+    tLEFTBRACKET  décalage et aller à l'état 22
+    tVAR          décalage et aller à l'état 23
+
+    value           aller à l'état 24
+    expression_alg  aller à l'état 51
+    call            aller à l'état 26
+
+
+État 39
+
+   31 expression_alg: expression_alg tMUL . expression_alg
+
+    tPRINTF       décalage et aller à l'état 19
+    tINT          décalage et aller à l'état 20
+    tFLOAT        décalage et aller à l'état 21
+    tLEFTBRACKET  décalage et aller à l'état 22
+    tVAR          décalage et aller à l'état 23
+
+    value           aller à l'état 24
+    expression_alg  aller à l'état 52
+    call            aller à l'état 26
+
+
+État 40
+
+   30 expression_alg: expression_alg tDIV . expression_alg
+
+    tPRINTF       décalage et aller à l'état 19
+    tINT          décalage et aller à l'état 20
+    tFLOAT        décalage et aller à l'état 21
+    tLEFTBRACKET  décalage et aller à l'état 22
+    tVAR          décalage et aller à l'état 23
+
+    value           aller à l'état 24
+    expression_alg  aller à l'état 53
+    call            aller à l'état 26
+
+
+État 41
+
+   12 declarationFun: declaration tLEFTBRACKET params tRIGHTBRACKET . body
+   14               | declaration tLEFTBRACKET params tRIGHTBRACKET . tSEMI
+
+    tLEFTBRACE  décalage et aller à l'état 45
+    tSEMI       décalage et aller à l'état 54
+
+    body  aller à l'état 55
+
+
+État 42
 
     7 var: tCOMMA tVAR var .
 
     $défaut  réduction par utilisation de la règle 7 (var)
 
 
-État 34
+État 43
 
-   19 body: tLEFTBRACE . expressions tRIGHTBRACE
+   21 suiteparams: tCOMMA tVAR . suiteparams
+
+    tCOMMA  décalage et aller à l'état 29
+
+    $défaut  réduction par utilisation de la règle 20 (suiteparams)
+
+    suiteparams  aller à l'état 56
+
+
+État 44
+
+   19 suiteparamsdecla: declaration tCOMMA . suiteparamsdecla
+
+    tTYPE  décalage et aller à l'état 2
+
+    $défaut  réduction par utilisation de la règle 18 (suiteparamsdecla)
+
+    declaration       aller à l'état 31
+    suiteparamsdecla  aller à l'état 57
+
+
+État 45
+
+   22 body: tLEFTBRACE . expressions tRIGHTBRACE
 
     tPRINTF  décalage et aller à l'état 19
     tTYPE    décalage et aller à l'état 2
-    tVAR     décalage et aller à l'état 40
+    tVAR     décalage et aller à l'état 58
 
-    $défaut  réduction par utilisation de la règle 21 (expressions)
+    $défaut  réduction par utilisation de la règle 24 (expressions)
 
-    declaration     aller à l'état 41
-    declarationVar  aller à l'état 42
-    expressions     aller à l'état 43
-    expression      aller à l'état 44
-    call            aller à l'état 45
+    declaration     aller à l'état 59
+    declarationVar  aller à l'état 60
+    expressions     aller à l'état 61
+    expression      aller à l'état 62
+    call            aller à l'état 63
 
 
-État 35
+État 46
 
    13 declarationFun: tMAIN tLEFTBRACKET params tRIGHTBRACKET body .
 
     $défaut  réduction par utilisation de la règle 13 (declarationFun)
 
 
-État 36
+État 47
 
-   18 suiteparams: tCOMMA param . suiteparams
+   36 call: tPRINTF tLEFTBRACKET params . tRIGHTBRACKET
 
-    tCOMMA  décalage et aller à l'état 28
-
-    $défaut  réduction par utilisation de la règle 17 (suiteparams)
-
-    suiteparams  aller à l'état 46
+    tRIGHTBRACKET  décalage et aller à l'état 64
 
 
-État 37
+État 48
 
-   33 call: tPRINTF tLEFTBRACKET params . tRIGHTBRACKET
+   32 expression_alg: tLEFTBRACKET expression_alg tRIGHTBRACKET .
 
-    tRIGHTBRACKET  décalage et aller à l'état 47
-
-
-État 38
-
-   32 call: tVAR tLEFTBRACKET params . tRIGHTBRACKET
-
-    tRIGHTBRACKET  décalage et aller à l'état 48
+    $défaut  réduction par utilisation de la règle 32 (expression_alg)
 
 
-État 39
+État 49
+
+   35 call: tVAR tLEFTBRACKET params . tRIGHTBRACKET
+
+    tRIGHTBRACKET  décalage et aller à l'état 65
+
+
+État 50
+
+   28 expression_alg: expression_alg . tADD expression_alg
+   28               | expression_alg tADD expression_alg .
+   29               | expression_alg . tMIN expression_alg
+   30               | expression_alg . tDIV expression_alg
+   31               | expression_alg . tMUL expression_alg
+
+    tMUL  décalage et aller à l'état 39
+    tDIV  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 28 (expression_alg)
+
+
+État 51
+
+   28 expression_alg: expression_alg . tADD expression_alg
+   29               | expression_alg . tMIN expression_alg
+   29               | expression_alg tMIN expression_alg .
+   30               | expression_alg . tDIV expression_alg
+   31               | expression_alg . tMUL expression_alg
+
+    tMUL  décalage et aller à l'état 39
+    tDIV  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 29 (expression_alg)
+
+
+État 52
+
+   28 expression_alg: expression_alg . tADD expression_alg
+   29               | expression_alg . tMIN expression_alg
+   30               | expression_alg . tDIV expression_alg
+   31               | expression_alg . tMUL expression_alg
+   31               | expression_alg tMUL expression_alg .
+
+    $défaut  réduction par utilisation de la règle 31 (expression_alg)
+
+
+État 53
+
+   28 expression_alg: expression_alg . tADD expression_alg
+   29               | expression_alg . tMIN expression_alg
+   30               | expression_alg . tDIV expression_alg
+   30               | expression_alg tDIV expression_alg .
+   31               | expression_alg . tMUL expression_alg
+
+    $défaut  réduction par utilisation de la règle 30 (expression_alg)
+
+
+État 54
+
+   14 declarationFun: declaration tLEFTBRACKET params tRIGHTBRACKET tSEMI .
+
+    $défaut  réduction par utilisation de la règle 14 (declarationFun)
+
+
+État 55
 
    12 declarationFun: declaration tLEFTBRACKET params tRIGHTBRACKET body .
 
     $défaut  réduction par utilisation de la règle 12 (declarationFun)
 
 
-État 40
+État 56
 
-   22 expression: tVAR . tEQ equation
-   32 call: tVAR . tLEFTBRACKET params tRIGHTBRACKET
+   21 suiteparams: tCOMMA tVAR suiteparams .
 
-    tEQ           décalage et aller à l'état 49
-    tLEFTBRACKET  décalage et aller à l'état 31
+    $défaut  réduction par utilisation de la règle 21 (suiteparams)
 
 
-État 41
+État 57
+
+   19 suiteparamsdecla: declaration tCOMMA suiteparamsdecla .
+
+    $défaut  réduction par utilisation de la règle 19 (suiteparamsdecla)
+
+
+État 58
+
+   25 expression: tVAR . tEQ expression_alg
+   35 call: tVAR . tLEFTBRACKET params tRIGHTBRACKET
+
+    tEQ           décalage et aller à l'état 66
+    tLEFTBRACKET  décalage et aller à l'état 36
+
+
+État 59
 
     5 declarationVar: declaration . var
 
@@ -507,276 +732,105 @@ call (36)
     var  aller à l'état 13
 
 
-État 42
-
-   23 expression: declarationVar .
-
-    $défaut  réduction par utilisation de la règle 23 (expression)
-
-
-État 43
-
-   19 body: tLEFTBRACE expressions . tRIGHTBRACE
-
-    tRIGHTBRACE  décalage et aller à l'état 50
-
-
-État 44
-
-   20 expressions: expression . tSEMI expressions
-
-    tSEMI  décalage et aller à l'état 51
-
-
-État 45
-
-   24 expression: call .
-
-    $défaut  réduction par utilisation de la règle 24 (expression)
-
-
-État 46
-
-   18 suiteparams: tCOMMA param suiteparams .
-
-    $défaut  réduction par utilisation de la règle 18 (suiteparams)
-
-
-État 47
-
-   33 call: tPRINTF tLEFTBRACKET params tRIGHTBRACKET .
-
-    $défaut  réduction par utilisation de la règle 33 (call)
-
-
-État 48
-
-   32 call: tVAR tLEFTBRACKET params tRIGHTBRACKET .
-
-    $défaut  réduction par utilisation de la règle 32 (call)
-
-
-État 49
-
-   22 expression: tVAR tEQ . equation
-
-    tPRINTF       décalage et aller à l'état 19
-    tINT          décalage et aller à l'état 20
-    tFLOAT        décalage et aller à l'état 21
-    tLEFTBRACKET  décalage et aller à l'état 52
-    tVAR          décalage et aller à l'état 53
-
-    value     aller à l'état 54
-    equation  aller à l'état 55
-    call      aller à l'état 24
-
-
-État 50
-
-   19 body: tLEFTBRACE expressions tRIGHTBRACE .
-
-    $défaut  réduction par utilisation de la règle 19 (body)
-
-
-État 51
-
-   20 expressions: expression tSEMI . expressions
-
-    tPRINTF  décalage et aller à l'état 19
-    tTYPE    décalage et aller à l'état 2
-    tVAR     décalage et aller à l'état 40
-
-    $défaut  réduction par utilisation de la règle 21 (expressions)
-
-    declaration     aller à l'état 41
-    declarationVar  aller à l'état 42
-    expressions     aller à l'état 56
-    expression      aller à l'état 44
-    call            aller à l'état 45
-
-
-État 52
-
-   29 equation: tLEFTBRACKET . equation tRIGHTBRACKET
-
-    tPRINTF       décalage et aller à l'état 19
-    tINT          décalage et aller à l'état 20
-    tFLOAT        décalage et aller à l'état 21
-    tLEFTBRACKET  décalage et aller à l'état 52
-    tVAR          décalage et aller à l'état 53
-
-    value     aller à l'état 54
-    equation  aller à l'état 57
-    call      aller à l'état 24
-
-
-État 53
-
-   31 equation: tVAR .
-   32 call: tVAR . tLEFTBRACKET params tRIGHTBRACKET
-
-    tLEFTBRACKET  décalage et aller à l'état 31
-
-    $défaut  réduction par utilisation de la règle 31 (equation)
-
-
-État 54
-
-   30 equation: value .
-
-    $défaut  réduction par utilisation de la règle 30 (equation)
-
-
-État 55
-
-   22 expression: tVAR tEQ equation .
-   25 equation: equation . tADD equation
-   26         | equation . tMIN equation
-   27         | equation . tDIV equation
-   28         | equation . tMUL equation
-
-    tADD  décalage et aller à l'état 58
-    tMIN  décalage et aller à l'état 59
-    tMUL  décalage et aller à l'état 60
-    tDIV  décalage et aller à l'état 61
-
-    $défaut  réduction par utilisation de la règle 22 (expression)
-
-
-État 56
-
-   20 expressions: expression tSEMI expressions .
-
-    $défaut  réduction par utilisation de la règle 20 (expressions)
-
-
-État 57
-
-   25 equation: equation . tADD equation
-   26         | equation . tMIN equation
-   27         | equation . tDIV equation
-   28         | equation . tMUL equation
-   29         | tLEFTBRACKET equation . tRIGHTBRACKET
-
-    tADD           décalage et aller à l'état 58
-    tMIN           décalage et aller à l'état 59
-    tMUL           décalage et aller à l'état 60
-    tDIV           décalage et aller à l'état 61
-    tRIGHTBRACKET  décalage et aller à l'état 62
-
-
-État 58
-
-   25 equation: equation tADD . equation
-
-    tPRINTF       décalage et aller à l'état 19
-    tINT          décalage et aller à l'état 20
-    tFLOAT        décalage et aller à l'état 21
-    tLEFTBRACKET  décalage et aller à l'état 52
-    tVAR          décalage et aller à l'état 53
-
-    value     aller à l'état 54
-    equation  aller à l'état 63
-    call      aller à l'état 24
-
-
-État 59
-
-   26 equation: equation tMIN . equation
-
-    tPRINTF       décalage et aller à l'état 19
-    tINT          décalage et aller à l'état 20
-    tFLOAT        décalage et aller à l'état 21
-    tLEFTBRACKET  décalage et aller à l'état 52
-    tVAR          décalage et aller à l'état 53
-
-    value     aller à l'état 54
-    equation  aller à l'état 64
-    call      aller à l'état 24
-
-
 État 60
 
-   28 equation: equation tMUL . equation
+   26 expression: declarationVar .
 
-    tPRINTF       décalage et aller à l'état 19
-    tINT          décalage et aller à l'état 20
-    tFLOAT        décalage et aller à l'état 21
-    tLEFTBRACKET  décalage et aller à l'état 52
-    tVAR          décalage et aller à l'état 53
-
-    value     aller à l'état 54
-    equation  aller à l'état 65
-    call      aller à l'état 24
+    $défaut  réduction par utilisation de la règle 26 (expression)
 
 
 État 61
 
-   27 equation: equation tDIV . equation
+   22 body: tLEFTBRACE expressions . tRIGHTBRACE
 
-    tPRINTF       décalage et aller à l'état 19
-    tINT          décalage et aller à l'état 20
-    tFLOAT        décalage et aller à l'état 21
-    tLEFTBRACKET  décalage et aller à l'état 52
-    tVAR          décalage et aller à l'état 53
-
-    value     aller à l'état 54
-    equation  aller à l'état 66
-    call      aller à l'état 24
+    tRIGHTBRACE  décalage et aller à l'état 67
 
 
 État 62
 
-   29 equation: tLEFTBRACKET equation tRIGHTBRACKET .
+   23 expressions: expression . tSEMI expressions
 
-    $défaut  réduction par utilisation de la règle 29 (equation)
+    tSEMI  décalage et aller à l'état 68
 
 
 État 63
 
-   25 equation: equation . tADD equation
-   25         | equation tADD equation .
-   26         | equation . tMIN equation
-   27         | equation . tDIV equation
-   28         | equation . tMUL equation
+   27 expression: call .
 
-    $défaut  réduction par utilisation de la règle 25 (equation)
+    $défaut  réduction par utilisation de la règle 27 (expression)
 
 
 État 64
 
-   25 equation: equation . tADD equation
-   26         | equation . tMIN equation
-   26         | equation tMIN equation .
-   27         | equation . tDIV equation
-   28         | equation . tMUL equation
+   36 call: tPRINTF tLEFTBRACKET params tRIGHTBRACKET .
 
-    $défaut  réduction par utilisation de la règle 26 (equation)
+    $défaut  réduction par utilisation de la règle 36 (call)
 
 
 État 65
 
-   25 equation: equation . tADD equation
-   26         | equation . tMIN equation
-   27         | equation . tDIV equation
-   28         | equation . tMUL equation
-   28         | equation tMUL equation .
+   35 call: tVAR tLEFTBRACKET params tRIGHTBRACKET .
 
-    tADD  décalage et aller à l'état 58
-    tMIN  décalage et aller à l'état 59
-
-    $défaut  réduction par utilisation de la règle 28 (equation)
+    $défaut  réduction par utilisation de la règle 35 (call)
 
 
 État 66
 
-   25 equation: equation . tADD equation
-   26         | equation . tMIN equation
-   27         | equation . tDIV equation
-   27         | equation tDIV equation .
-   28         | equation . tMUL equation
+   25 expression: tVAR tEQ . expression_alg
 
-    tADD  décalage et aller à l'état 58
-    tMIN  décalage et aller à l'état 59
+    tPRINTF       décalage et aller à l'état 19
+    tINT          décalage et aller à l'état 20
+    tFLOAT        décalage et aller à l'état 21
+    tLEFTBRACKET  décalage et aller à l'état 22
+    tVAR          décalage et aller à l'état 23
 
-    $défaut  réduction par utilisation de la règle 27 (equation)
+    value           aller à l'état 24
+    expression_alg  aller à l'état 69
+    call            aller à l'état 26
+
+
+État 67
+
+   22 body: tLEFTBRACE expressions tRIGHTBRACE .
+
+    $défaut  réduction par utilisation de la règle 22 (body)
+
+
+État 68
+
+   23 expressions: expression tSEMI . expressions
+
+    tPRINTF  décalage et aller à l'état 19
+    tTYPE    décalage et aller à l'état 2
+    tVAR     décalage et aller à l'état 58
+
+    $défaut  réduction par utilisation de la règle 24 (expressions)
+
+    declaration     aller à l'état 59
+    declarationVar  aller à l'état 60
+    expressions     aller à l'état 70
+    expression      aller à l'état 62
+    call            aller à l'état 63
+
+
+État 69
+
+   25 expression: tVAR tEQ expression_alg .
+   28 expression_alg: expression_alg . tADD expression_alg
+   29               | expression_alg . tMIN expression_alg
+   30               | expression_alg . tDIV expression_alg
+   31               | expression_alg . tMUL expression_alg
+
+    tADD  décalage et aller à l'état 37
+    tMIN  décalage et aller à l'état 38
+    tMUL  décalage et aller à l'état 39
+    tDIV  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 25 (expression)
+
+
+État 70
+
+   23 expressions: expression tSEMI expressions .
+
+    $défaut  réduction par utilisation de la règle 23 (expressions)
