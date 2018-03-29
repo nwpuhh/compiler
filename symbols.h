@@ -29,19 +29,25 @@ struct symbol_stack {
 void init_stack(symbol_stack * stack);
 
 //judge the stack is empty or not: 0->no others->yes
-int is_empty(symbol_stack stack);
+int is_empty(const symbol_stack* stack);
 
 //insert node in stack
 void push(symbol_stack * stack, symbol_node * new_node);
 
 //get the top of the stack
-symbol_node top(symbol_stack stack);
+symbol_node top(const symbol_stack* stack);
 
 //pop node from stack, and return the node
 symbol_node pop(symbol_stack * stack);
 
 //serach the node by the id
-symbol_node research_by_id(symbol_stack * stack, char* id_s);
+symbol_node research_by_id(const symbol_stack * stack, char* id_s);
+
+//print the stack from the top to the bottom
+void print_stack(const symbol_stack * stack);
+
+//print the symbol(the var in the table)
+void print_symbol(const symbol* symbol);
 
 
 int ts_new_tmp();
