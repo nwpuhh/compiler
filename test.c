@@ -1,5 +1,5 @@
-main(){
-	int i,j,k,r;
+int main(){
+	int i,j,k = 1,r = 0;
 	i=3;
 	j=4;
 	k=8;

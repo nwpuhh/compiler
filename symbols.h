@@ -1,29 +1,29 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-enum typeVar_t { INT , FLOAT};
 
-struct symbol { 
+typedef struct symbol { 
 	//address in range of 0 to 255
 	int address;
-	char* id;
-	typeVar_t type;
+	char id[100] ;
+	char type [5] ;
 	int depth;
-};
+	int tmp;
+} symbol ;
 
-struct symbol_node {
+typedef struct symbol_node {
 	//The data of the node
 	symbol   element;
 	//The pointer of the previous node
-	symbol_node *  previous;
-};
+	struct symbol_node *  previous;
+} symbol_node;
 
 //The stack of the symbol_node
-struct symbol_stack {
+typedef struct symbol_stack {
 	//The base and the sommet of the stack
 	symbol_node * ebp;
 	symbol_node * esp;
-};
+} symbol_stack;
 
 //constructor
 void init_stack(symbol_stack * stack);
@@ -35,13 +35,13 @@ int is_empty(const symbol_stack* stack);
 void push(symbol_stack * stack, symbol_node * new_node);
 
 //get the top of the stack
-symbol_node top(const symbol_stack* stack);
+symbol_node * top(const symbol_stack* stack);
 
 //pop node from stack, and return the node
-symbol_node pop(symbol_stack * stack);
+symbol_node  pop(symbol_stack * stack);
 
 //serach the node by the id
-symbol_node research_by_id(const symbol_stack * stack, char* id_s);
+symbol_node * research_by_id(const symbol_stack * stack, char* id_s);
 
 //print the stack from the top to the bottom
 void print_stack(const symbol_stack * stack);
@@ -50,7 +50,7 @@ void print_stack(const symbol_stack * stack);
 void print_symbol(const symbol* symbol);
 
 
-int ts_new_tmp();
+symbol ts_new_tmp(symbol_stack * stack ,int address);
 
-int ts_new();
+symbol ts_new(symbol_stack * stack, int address, const char* id, const char* type, int depth);
 

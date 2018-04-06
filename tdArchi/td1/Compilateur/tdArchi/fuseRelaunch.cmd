@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "/home/hhu/Compilateur/tdArchi/td1/Compilateur/tdArchi/test1_isim_beh.exe" -prj "/home/hhu/Compilateur/tdArchi/td1/Compilateur/tdArchi/test1_beh.prj" "work.test1" 
