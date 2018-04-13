@@ -1,3 +1,4 @@
+
 int main(){
 	int i,j,k = 1,r = 0;
 	i=3;

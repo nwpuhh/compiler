@@ -1,6 +1,16 @@
 %{#include <stdio.h>
   #include "symbols.h"
   #include "string.h"
+
+  #define OPP3(op, A, B) \
+    printf("%s %d %d\n",op,A,B);	
+
+  #define OPP4(op, A,B,C) \
+	printf("%s %d %d %d\n",op,A,B,C);
+
+  #define OPP2(op, A) \
+	printf("%s %d\n",op, A);
+
 	int yylex(void);
 	void yyerror(char*);
 	symbol_stack ts ;
@@ -24,33 +34,32 @@
 
 %%
 
-S : 
-	| declarationVar S {printf("déclaration \n");}
-	| declarationFun S  {printf("function \n");}
+S : 					{print_stack(&ts);}
+	| declarationVar S 
+	| declarationFun S 
 ;
-declaration :  tTYPE tVAR {	printf("var\n");
+declaration :  tTYPE tVAR {
 							if(research_by_id(&ts,$2) != NULL){
 								exit(-1);
 							} else {
 								ts_new( &ts, esp++, $2, $1, 0);
-								print_stack(&ts);
+								//print_stack(&ts);
 							}		
 						   }
 			 
 ;
 
-afcInDec : 
-			 | tEQ expression_alg { symbol_node sn = pop(&ts)	;
+afcInDec :  
+			|  tEQ expression_alg { symbol_node sn = pop(&ts)	;
 								    esp-- ;						 
-							 	    printf("LOAD R0 %d\n",sn.element.address);
-							   	    printf("STORE %d R0\n",research_by_id(&ts,top(&ts)->element.id)->element.address);}	
+							 	    OPP3("LOAD", 0,sn.element.address);
+							   	    OPP3("STORE",research_by_id(&ts,top(&ts)->element.id)->element.address,0);}	
 ;
-declarationVar : declaration afcInDec var {printf("declaration\n");}
+declarationVar : declaration afcInDec var 
 ;
 
-var : 
-    | tCOMMA newVar var {}						
-	| tCOMMA newVar afcInDec var {}
+var : 						
+	| tCOMMA newVar afcInDec var
 ;
 
 newVar : tVAR { if(research_by_id(&ts,$1) != NULL){
@@ -58,61 +67,98 @@ newVar : tVAR { if(research_by_id(&ts,$1) != NULL){
 						} else {
 							symbol_node * sp = top(&ts);
 							ts_new( &ts, esp++, $1, sp->element.type, 0);
-							print_stack(&ts);
+							//print_stack(&ts);
 						}}
 
 ;
-afc : tVAR tEQ expression_alg   { 
-								  symbol_node sn = pop(&ts)	;
-								  esp-- ;						 
-							 	  printf("LOAD R0 %d\n",sn.element.address);
-							   	  printf("STORE %d R0\n",research_by_id(&ts,$1)->element.address);
-								}
-	 
-;
 value : tINT {symbol s = ts_new_tmp(&ts, esp++);
-			  printf("AFC R0 %d\n",$1);
-			  printf("STORE %d R0\n", s.address);}
-	  | tFLOAT {printf(" float \n"); }
-	  | call  {printf("call\n"); }
+			  OPP3("AFC", 0,$1);
+			  OPP3("STORE",s.address,0);}
+	  | tFLOAT 
+	  | call  
 ;
 
-declarationFun : declaration tLEFTBRACKET params tRIGHTBRACKET body {printf("function\n");}
-			   | tTYPE tMAIN tLEFTBRACKET params tRIGHTBRACKET body {printf("main\n");}
-			   | declaration tLEFTBRACKET params tRIGHTBRACKET tSEMI {printf("prototype\n");}
+declarationFun : declaration tLEFTBRACKET params tRIGHTBRACKET body 
+			   | tTYPE tMAIN tLEFTBRACKET params tRIGHTBRACKET body 
+			   | declaration tLEFTBRACKET params tRIGHTBRACKET tSEMI 
 ;
 params : 
-	   | declaration suiteparamsdecla {printf("params\n");}
-	   | tVAR suiteparams {printf("params\n");}
+	   | declaration suiteparamsdecla 
+	   | tVAR suiteparams {
+						   OPP3("LOAD", 0,research_by_id(&ts,$1)->element.address);
+						   symbol s = ts_new_tmp(&ts,esp++);
+						   OPP3("STORE",s.address,0);}
+	   | value suiteparams
 ;
 suiteparamsdecla :
-				 | declaration tCOMMA suiteparamsdecla {printf("param\n");}
+				 | declaration tCOMMA suiteparamsdecla 
 ;
 suiteparams : 
-			| tCOMMA tVAR suiteparams {printf("suite params\n");}
+			| tCOMMA tVAR suiteparams {
+				OPP3("LOAD", 0 , research_by_id(&ts,$2)->element.address);
+				symbol s  = ts_new_tmp(&ts,esp++);
+			    OPP3("STORE",s.address,0);}
+
+			| tCOMMA value suiteparams 
 ;
 		
-body : tLEFTBRACE expressions tRIGHTBRACE {printf("body\n");}
+body : tLEFTBRACE expressions tRIGHTBRACE 
 ;
 
-expressions : expression tSEMI expressions {printf("expression\n");}
+expressions : expression tSEMI expressions 
 			| 
 ;
-expression : tVAR tEQ expression_alg {printf("affectation\n");}
-			| declarationVar {printf("declaration var\n");}
-			| call {printf("call\n");}
+expression : tVAR tEQ expression_alg {
+									  OPP3("LOAD",0 , pop(&ts).element.address);
+									  esp--;
+									  OPP3("STORE",research_by_id(&ts,$1)->element.address,0);}
+			| declarationVar 
+			| call 
 ;
-expression_alg :  expression_alg tADD expression_alg {printf("+\n");}
-				 |	expression_alg tMIN expression_alg {printf("-\n");}
-		 		 |	expression_alg tDIV expression_alg {printf("/\n");}
-		 		 |	expression_alg tMUL expression_alg {printf("*\n");}
-		 		 | tLEFTBRACKET expression_alg tRIGHTBRACKET {printf("()\n");}
-		  		 | value
-		         | tVAR {printf("variable\n");}
+expression_alg :  expression_alg tADD expression_alg {
+					OPP3("LOAD",0,pop(&ts).element.address);
+			 		esp--;
+		   			OPP3("LOAD",1 , pop(&ts).element.address);
+					esp--;
+					OPP4("ADD", 0, 1, 0);
+					symbol s = ts_new_tmp(&ts,esp++);
+					OPP3("STORE",s.address,0);}
+			| expression_alg tMIN expression_alg {
+
+					OPP3("LOAD",0 , pop(&ts).element.address);
+					esp--;
+					OPP3("LOAD",1, pop(&ts).element.address);
+					esp--;
+					OPP4("SOU", 0, 1 ,0);
+					symbol s = ts_new_tmp(&ts,esp++);
+					OPP3("STORE",s.address,0);}
+			| expression_alg tDIV expression_alg {
+					OPP3("LOAD",0 , pop(&ts).element.address);
+					esp--;
+					OPP3("LOAD", 1 , pop(&ts).element.address);
+					esp--;
+					OPP4("DIV", 0,1,0);
+					symbol s = ts_new_tmp(&ts,esp++);
+					OPP3("STORE",s.address,0);}
+		 	| expression_alg tMUL expression_alg {
+					OPP3("LOAD",0, pop(&ts).element.address);
+					esp--;
+					OPP3("LOAD",1, pop(&ts).element.address);
+					esp--;
+					OPP4("MUL", 0,1,0);
+					symbol s = ts_new_tmp(&ts,esp++);
+					OPP3("STORE",s.address,0);}
+		 	| tLEFTBRACKET expression_alg tRIGHTBRACKET 
+		  	| value
+		    | tVAR {
+					symbol s = ts_new_tmp(&ts,esp++);
+					OPP3("LOAD",0 ,research_by_id(&ts,$1)->element.address);
+					OPP3("STORE",s.address,0);}
 ;
 
-call : tVAR tLEFTBRACKET params tRIGHTBRACKET
-	 | tPRINTF 	tLEFTBRACKET params tRIGHTBRACKET {printf("printf\n");}
+call : tVAR tLEFTBRACKET params tRIGHTBRACKET	{ 
+			OPP2("JMP",research_by_id(&ts,$1)->element.address);}
+	 | tPRINTF 	tLEFTBRACKET params tRIGHTBRACKET //{printf("printf\n");}
 ;	
 				 
 
