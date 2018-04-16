@@ -2,27 +2,27 @@
 
 #define SIZE_TABLE 1024
 
-struct operation {
+typedef struct operation {
 	char op[10];
-	int  a;
-	int  b;
-	int  c;
-}
+	int  a ;
+	int  b ;
+	int  c ;
+	int nbParam ;
+} operation;
 
-struct table_ops {
+typedef struct table_ops {
 	int len;
 	operation table[SIZE_TABLE];
-}
+} table_ops;
 
-//define the global variable of the table
-table_ops table;
 
 //init the table
-void init();
+void init_operations(table_ops * operations);
 
-//
-void add_op(table_ops * table, op)
+//add the operations
+int add_op(table_ops * operations, char * op, int a, int b, int c, int nbParam);
 
+//print the table of operations
+void print_ops(const table_ops operations);
 
-
-
+void to_file(const table_ops operations, const char* filename);
