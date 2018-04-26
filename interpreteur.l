@@ -23,4 +23,4 @@
 			yylval.integer = atoi(yytext);
 			return tPARAM;    
 		}
-
+(" "|\t|\n)+		;
