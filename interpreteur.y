@@ -87,7 +87,7 @@ operation :   tADD tPARAM tPARAM tPARAM {
 										}
 			| tEQU tPARAM tPARAM tPARAM {
 											if($2 < NBREG & $3 < NBREG & $4 < NBREG){
-												if(reg[$3] == reg[$4]
+												if(reg[$3] == reg[$4])
 													reg[$2] = 1;
 												else 
 													reg[$2] = 0;
@@ -97,7 +97,7 @@ operation :   tADD tPARAM tPARAM tPARAM {
 										}
 			| tINF tPARAM tPARAM tPARAM {
 											if($2 < NBREG & $3 < NBREG & $4 < NBREG){
-												if(reg[$3] < reg[$4]
+												if(reg[$3] < reg[$4])
 													reg[$2] = 1;
 												else 
 													reg[$2] = 0;
@@ -107,7 +107,7 @@ operation :   tADD tPARAM tPARAM tPARAM {
 										}
 			| tINFE tPARAM tPARAM tPARAM {
 											if($2 < NBREG & $3 < NBREG & $4 < NBREG){
-												if(reg[$3] =< reg[$4]
+												if(reg[$3] <= reg[$4])
 													reg[$2] = 1;
 												else 
 													reg[$2] = 0;
@@ -117,7 +117,7 @@ operation :   tADD tPARAM tPARAM tPARAM {
 										}
 			| tSUP tPARAM tPARAM tPARAM {
 											if($2 < NBREG & $3 < NBREG & $4 < NBREG){
-												if(reg[$3] > reg[$4]
+												if(reg[$3] > reg[$4])
 													reg[$2] = 1;
 												else 
 													reg[$2] = 0;
@@ -127,7 +127,7 @@ operation :   tADD tPARAM tPARAM tPARAM {
 										}
 			| tSUPE tPARAM tPARAM tPARAM {
 											if($2 < NBREG & $3 < NBREG & $4 < NBREG){
-												if(reg[$3] >= reg[$4]
+												if(reg[$3] >= reg[$4])
 													reg[$2] = 1;
 												else 
 													reg[$2] = 0;

@@ -79,6 +79,7 @@
   <transforms xmlns="http://www.xilinx.com/XMLSchema">
     <transform xil_pn:end_ts="1522420446" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1522420446">
       <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
     </transform>
     <transform xil_pn:end_ts="1522421218" xil_pn:in_ck="6336439893429381800" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1522421218">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -140,6 +141,7 @@
     </transform>
     <transform xil_pn:end_ts="1522419876" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1522419876">
       <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
     </transform>
     <transform xil_pn:end_ts="1522419876" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="-6912712337693249800" xil_pn:start_ts="1522419876">
       <status xil_pn:value="SuccessfullyRun"/>
