@@ -39,27 +39,27 @@ ARCHITECTURE behavior OF alu_test IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT ALU
+    COMPONENT ALU8Bits
     PORT(
          clk : IN  std_logic;
-         Ctrl_Alu : IN  std_logic_vector(15 downto 0);
-         A : IN  std_logic_vector(15 downto 0);
-         B : IN  std_logic_vector(15 downto 0);
+         Ctrl_Alu : IN  std_logic_vector(7 downto 0);
+         A : IN  std_logic_vector(7 downto 0);
+         B : IN  std_logic_vector(7 downto 0);
          flag : OUT  std_logic_vector(3 downto 0);
-         S : OUT  std_logic_vector(15 downto 0)
+         S : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
    signal clk : std_logic := '0';
-   signal Ctrl_Alu : std_logic_vector(15 downto 0) := (others => '0');
-   signal A : std_logic_vector(15 downto 0) := (others => '0');
-   signal B : std_logic_vector(15 downto 0) := (others => '0');
+   signal Ctrl_Alu : std_logic_vector(7 downto 0) := (others => '0');
+   signal A : std_logic_vector(7 downto 0) := (others => '0');
+   signal B : std_logic_vector(7 downto 0) := (others => '0');
 
  	--Outputs
    signal flag : std_logic_vector(3 downto 0);
-   signal S : std_logic_vector(15 downto 0);
+   signal S : std_logic_vector(7 downto 0);
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -67,7 +67,7 @@ ARCHITECTURE behavior OF alu_test IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: ALU PORT MAP (
+   uut: ALU8Bits PORT MAP (
           clk => clk,
           Ctrl_Alu => Ctrl_Alu,
           A => A,
@@ -95,9 +95,9 @@ BEGIN
       wait for clk_period*10;
 
       -- insert stimulus here 
-		Ctrl_Alu <= x"0001";
-		A <= x"0000", x"0101" after 100 ns, x"0110" after 200 ns, x"1100" after 300ns , x"1101" after 400ns , x"7fff" after 500ns, x"8000" after 600ns;
-		B <= x"0000", x"0011" after 100 ns, x"0010" after 200 ns, x"f110" after 300ns , x"7010" after 400ns , x"7000" after 500ns, x"800f" after 600ns;
+		Ctrl_Alu <= x"03";
+		A <= x"00", x"01" after 100 ns, x"10" after 200 ns, x"00" after 300ns , x"01" after 400ns , x"ff" after 500ns, x"00" after 600ns;
+		B <= x"00", x"11" after 100 ns, x"10" after 200 ns, x"10" after 300ns , x"10" after 400ns , x"00" after 500ns, x"ff" after 600ns;
       wait;
    end process;
 

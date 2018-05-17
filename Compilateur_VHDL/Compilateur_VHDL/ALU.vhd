@@ -50,9 +50,9 @@ signal Rmul: STD_LOGIC_VECTOR(31 downto 0);
 
 begin
 	Radd <= '0'&A + B; 
-	Rsub <= '0'&A - B;     
+	Rsub <= ('0'&A) - ('0'&B);     
 	Rmul <= A * B; 
-	    
+	
 	
 	R <= Radd(15 downto 0) when Ctrl_Alu = x"0001" else --x01 equal add
 		  Rsub(15 downto 0) when Ctrl_Alu = x"0003" else --x03 equal sub
@@ -62,8 +62,16 @@ begin
 	S <= R;
 	
 	flag(0) <= Radd(16) when Ctrl_Alu = x"0001" else --flag(0) is the FLAG_CARRY
-				  not (Rsub(16) = '0') when Ctrl_Alu = x"0003";
+				  Rsub(16) when Ctrl_Alu= x"0003" else
+				  '0';
 	flag(1) <= R(15) ; --flag(1) is the FLAG_NEGATIVE
-	flag(2) <= '1' when (R = x"0000") else '0'; -- flag(2) is the FLAG_ZERO 
+	flag(2) <= '1' when (R = x"0000") else '0'; -- flag(2) is the FLAG_ZERO
+	flag(3) <= '1' when (Ctrl_Alu=x"0001" and A(15) = '0' and B(15) = '0' and Radd(15) = '1') else-- flag(3) is the FLAG_OVERFLOW
+				  '1' when (Ctrl_Alu=x"0001" and A(15) = '1' and B(15) = '1' and Radd(15) = '0') else
+				  '1' when (Ctrl_Alu=x"0003" and A(15) = '0' and B(15) = '1' and Rsub(15) = '1') else
+				  '1' when (Ctrl_Alu=x"0003" and A(15) = '1' and B(15) = '0' and Rsub(15) = '0') else
+				  '0' when (Ctrl_Alu=x"0002" and (Rmul(31 downto 16) = x"0000")) else
+				  '1' when (Ctrl_Alu=x"0002") else
+				  '0';
 end Behavioral;
 

@@ -1,0 +1,25 @@
+Running: /usr/local/insa/Xilinx.ISE/13.4/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib secureip -o /home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/alu_test_isim_beh.exe -prj /home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/alu_test_beh.prj work.alu_test 
+ISim O.87xd (signature 0x8ddf5b5d)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/ALU.vhd" into library work
+Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/alu_test.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 97788 KB
+Fuse CPU Usage: 870 ms
+Compiling package standard
+Compiling package std_logic_1164
+Compiling package numeric_std
+Compiling package std_logic_arith
+Compiling package std_logic_unsigned
+Compiling architecture behavioral of entity ALU [alu_default]
+Compiling architecture behavior of entity alu_test
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 8 VHDL Units
+Built simulation executable /home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/alu_test_isim_beh.exe
+Fuse Memory Usage: 673616 KB
+Fuse CPU Usage: 960 ms
+GCC CPU Usage: 130 ms
