@@ -8,22 +8,7 @@
 <!-- Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd</arg>&quot; Line <arg fmt="%d" index="2">66</arg>. <arg fmt="%s" index="3">Syntax error near &quot;if&quot;.</arg>
-</msg>
-
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd</arg>&quot; Line <arg fmt="%d" index="2">69</arg>. <arg fmt="%s" index="3">Syntax error near &quot;elsif&quot;.</arg>
-</msg>
-
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd</arg>&quot; Line <arg fmt="%d" index="2">72</arg>. <arg fmt="%s" index="3">Syntax error near &quot;elsif&quot;.</arg>
-</msg>
-
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd</arg>&quot; Line <arg fmt="%d" index="2">75</arg>. <arg fmt="%s" index="3">Syntax error near &quot;else&quot;.</arg>
-</msg>
-
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd</arg>&quot; Line <arg fmt="%d" index="2">78</arg>. <arg fmt="%s" index="3">Syntax error near &quot;if&quot;.</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/decodeur.vhd&quot; into library work</arg>
 </msg>
 
 </messages>

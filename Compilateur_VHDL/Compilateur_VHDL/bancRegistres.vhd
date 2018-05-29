@@ -33,9 +33,9 @@ entity bancRegistres is
     Port ( 
 	        clock : in STD_LOGIC;
 			  RST : in STD_LOGIC;
-			  A_no : in  STD_LOGIC_VECTOR (15 downto 0);
-           B_no : in  STD_LOGIC_VECTOR (15 downto 0);
-           W_no : in  STD_LOGIC_VECTOR (15 downto 0);
+			  A_no : in  integer range 0 to 15;
+           B_no : in  integer range 0 to 15;
+           W_no : in  integer range 0 to 15;
            W : in  STD_LOGIC;
            Data : in  STD_LOGIC_VECTOR (15 downto 0);
            QA : out  STD_LOGIC_VECTOR (15 downto 0);
@@ -61,21 +61,12 @@ begin
 			end if;
 	end process;
 	
-	W_temp <= W_no;
 	
-	if(W_temp=A_no) then
-		QA <= Data; 
-		QB <= registers(B_no);
-	elsif(W_temp=B_no) then
-		QA <= registers(A_no);
-		QB <= Data;
-	elsif(W_temp = A_no and W_temp = B_no) then
-		QA <= Data; 
-		QB <= Data;
-	else then
-		QA <= registers(A_no);
-		QB <= registers(B_no);
-	end if;
+	QA <= Data when (W='1' and W_no=A_no)  else
+			registers(A_no);
+	QB <= Data when (W = '1' and W_no = B_no) else
+			registers(B_no);
+		
 	
 end Behavioral;
 

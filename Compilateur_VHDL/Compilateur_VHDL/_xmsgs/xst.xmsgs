@@ -8,37 +8,13 @@
 <msg type="info" file="Xst" num="0" delta="new" >Part-select index evaluated to out of bound value may lead to incorrect synthesis results; it is recommended not to use them in RTL
 </msg>
 
-<msg type="error" file="HDLCompiler" num="1728" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 59: Type error near <arg fmt="%s" index="1">w_no</arg> ; current type <arg fmt="%s" index="2">std_logic_vector</arg>; expected type <arg fmt="%s" index="3">integer</arg>
+<msg type="error" file="HDLCompiler" num="806" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/decodeur.vhd" Line 46: Syntax error near &quot;<arg fmt="%s" index="1">&lt;=</arg>&quot;.
 </msg>
 
-<msg type="error" file="HDLCompiler" num="806" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 66: Syntax error near &quot;<arg fmt="%s" index="1">if</arg>&quot;.
+<msg type="error" file="HDLCompiler" num="806" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/decodeur.vhd" Line 47: Syntax error near &quot;<arg fmt="%s" index="1">else</arg>&quot;.
 </msg>
 
-<msg type="error" file="HDLCompiler" num="1728" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 68: Type error near <arg fmt="%s" index="1">b_no</arg> ; current type <arg fmt="%s" index="2">std_logic_vector</arg>; expected type <arg fmt="%s" index="3">integer</arg>
-</msg>
-
-<msg type="error" file="HDLCompiler" num="806" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 69: Syntax error near &quot;<arg fmt="%s" index="1">elsif</arg>&quot;.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="1728" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 70: Type error near <arg fmt="%s" index="1">a_no</arg> ; current type <arg fmt="%s" index="2">std_logic_vector</arg>; expected type <arg fmt="%s" index="3">integer</arg>
-</msg>
-
-<msg type="error" file="HDLCompiler" num="806" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 72: Syntax error near &quot;<arg fmt="%s" index="1">elsif</arg>&quot;.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="806" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 75: Syntax error near &quot;<arg fmt="%s" index="1">else</arg>&quot;.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="1728" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 76: Type error near <arg fmt="%s" index="1">a_no</arg> ; current type <arg fmt="%s" index="2">std_logic_vector</arg>; expected type <arg fmt="%s" index="3">integer</arg>
-</msg>
-
-<msg type="error" file="HDLCompiler" num="1728" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 77: Type error near <arg fmt="%s" index="1">b_no</arg> ; current type <arg fmt="%s" index="2">std_logic_vector</arg>; expected type <arg fmt="%s" index="3">integer</arg>
-</msg>
-
-<msg type="error" file="HDLCompiler" num="806" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 78: Syntax error near &quot;<arg fmt="%s" index="1">if</arg>&quot;.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="854" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" Line 45: Unit &lt;<arg fmt="%s" index="1">behavioral</arg>&gt; ignored due to previous errors.
+<msg type="error" file="HDLCompiler" num="854" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/decodeur.vhd" Line 40: Unit &lt;<arg fmt="%s" index="1">behavioral</arg>&gt; ignored due to previous errors.
 </msg>
 
 </messages>
