@@ -6,6 +6,8 @@
 
 "main"	return tMAIN;
 "printf"	return tPRINTF;
+"if" 	return tIF;
+"else"	return tELSE;
 "{"		return tLEFTBRACE;
 "}"		return tRIGHTBRACE;
 "return" 	return tRETURN;  
@@ -20,6 +22,13 @@ const	return tCONST;
 					yylval.str = strdup(yytext);
 					return tTYPE;
 				}
+">" return tGREATER;
+"<" return tLESS;
+"!" return tNOT;
+"&&" return tAND;
+"||" return tOR;
+"==" return t2EQ;
+"!=" return tNOTEQ;
 
 "+"	return tADD;
 "-"	return tMIN;

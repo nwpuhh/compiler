@@ -36,10 +36,18 @@
 	char* str;
 }
 
-%token tMAIN tPRINTF tLEFTBRACE tRIGHTBRACE tINT tFLOAT tCONST tTYPE tADD tMIN tMUL tDIV tEQ tLEFTBRACKET tRIGHTBRACKET tSEMI tCOMMA tVAR tRETURN;
+%token tMAIN tPRINTF tLEFTBRACE tRIGHTBRACE tINT tFLOAT tCONST tTYPE tADD tMIN tMUL tDIV tEQ tLEFTBRACKET tRIGHTBRACKET tSEMI tCOMMA tVAR tRETURN tLESS tGREATER tNOT tIF tELSE tAND tOR t2EQ tNOTEQ;
 
+%left tOR
+%left tAND
+%left t2EQ tNOTEQ
+%left tGREATER tLESS
 %left tADD tMIN
 %left tMUL tDIV
+%left tLEFTBRACKET tRIGHTBRACKET
+
+%nonassoc tIFX
+%nonassoc tELSE
 
 %type <str> tVAR tTYPE
 
@@ -50,7 +58,7 @@
 
 S : 					{print_stack(&ts);
 						 print_ops(operations);
-						 to_file(operations, "test.s");}
+						 to_file(operations, "Interpreteur/test.s");}
 	| declarationVar S 
 	| declarationFun S 
 ;
@@ -130,6 +138,7 @@ expression : tVAR tEQ expression_alg {
 									  OPP3("STORE",research_by_id(&ts,$1)->element.address,0);}
 			| declarationVar 
 			| call 
+			| expression_if
 ;
 expression_alg :  expression_alg tADD expression_alg {
 					OPP3("LOAD",0,pop(&ts).element.address);
@@ -174,9 +183,32 @@ expression_alg :  expression_alg tADD expression_alg {
 
 call : tVAR tLEFTBRACKET params tRIGHTBRACKET	{ 
 			OPP2("JMP",research_by_id(&ts,$1)->element.address);}
-	 | tPRINTF 	tLEFTBRACKET params tRIGHTBRACKET //{printf("printf\n");}
+	 | tPRINTF 	tLEFTBRACKET params tRIGHTBRACKET {	OPP3("LOAD",0 , pop(&ts).element.address);
+									  				esp--;
+									  				OPP2("PRINTF",0);}
 ;	
-				 
+
+expression_if: tIF tLEFTBRACKET expression_condition tRIGHTBRACKET body_if %prec tIFX
+		| tIF tLEFTBRACKET expression_condition tRIGHTBRACKET body_if tELSE body_if
+		;
+
+body_if: tLEFTBRACE expressions tRIGHTBRACE
+		| expressions
+		;
+
+expression_condition :  expression_alg
+				| tLEFTBRACKET expression_alg tRIGHTBRACKET
+				| expression_alg t2EQ expression_alg
+				| tNOT expression_condition
+				| expression_alg tGREATER tEQ expression_alg
+				| expression_alg tLESS tEQ expression_alg
+				| expression_alg tGREATER expression_alg
+				| expression_alg tLESS expression_alg
+				| expression_alg tNOTEQ expression_alg
+				| expression_condition tAND expression_condition
+				| expression_condition tOR expression_condition
+				;	
+	
 
 %%
 int main(){

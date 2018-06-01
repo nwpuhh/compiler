@@ -41,11 +41,11 @@ ARCHITECTURE behavior OF bancRegister_test IS
  
     COMPONENT bancRegistres
     PORT(
-         clock : IN  std_logic;
+         clk : IN  std_logic;
          RST : IN  std_logic;
-         A_no : IN  integer range 0 to 15;
-         B_no : IN  integer range 0 to 15;
-         W_no : IN  integer range 0 to 15;
+         A_no : IN  std_logic_vector(3 downto 0);
+         B_no : IN  std_logic_vector(3 downto 0);
+         W_no : IN  std_logic_vector(3 downto 0);
          W : IN  std_logic;
          Data : IN  std_logic_vector(15 downto 0);
          QA : OUT  std_logic_vector(15 downto 0);
@@ -55,11 +55,11 @@ ARCHITECTURE behavior OF bancRegister_test IS
     
 
    --Inputs
-   signal clock : std_logic := '0';
+   signal clk : std_logic := '0';
    signal RST : std_logic := '0';
-   signal A_no : integer range 0 to 15 := 0;
-   signal B_no : integer range 0 to 15 := 0;
-   signal W_no : integer range 0 to 15 := 0;
+   signal A_no : std_logic_vector(3 downto 0) := (others => '0');
+   signal B_no : std_logic_vector(3 downto 0) := (others => '0');
+   signal W_no : std_logic_vector(3 downto 0) := (others => '0');
    signal W : std_logic := '0';
    signal Data : std_logic_vector(15 downto 0) := (others => '0');
 
@@ -74,7 +74,7 @@ BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: bancRegistres PORT MAP (
-          clock => clock,
+          clk => clk,
           RST => RST,
           A_no => A_no,
           B_no => B_no,
@@ -88,9 +88,9 @@ BEGIN
    -- Clock process definitions
    clock_process :process
    begin
-		clock <= '0';
+		clk <= '0';
 		wait for clock_period/2;
-		clock <= '1';
+		clk <= '1';
 		wait for clock_period/2;
    end process;
  

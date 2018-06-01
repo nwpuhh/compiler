@@ -8,13 +8,10 @@
 <msg type="info" file="Xst" num="0" delta="new" >Part-select index evaluated to out of bound value may lead to incorrect synthesis results; it is recommended not to use them in RTL
 </msg>
 
-<msg type="error" file="HDLCompiler" num="806" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/decodeur.vhd" Line 46: Syntax error near &quot;<arg fmt="%s" index="1">&lt;=</arg>&quot;.
+<msg type="error" file="HDLCompiler" num="69" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.vhd" Line 211: &lt;<arg fmt="%s" index="1">opdex</arg>&gt; is not declared.
 </msg>
 
-<msg type="error" file="HDLCompiler" num="806" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/decodeur.vhd" Line 47: Syntax error near &quot;<arg fmt="%s" index="1">else</arg>&quot;.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="854" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/decodeur.vhd" Line 40: Unit &lt;<arg fmt="%s" index="1">behavioral</arg>&gt; ignored due to previous errors.
+<msg type="error" file="HDLCompiler" num="854" delta="new" >"/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.vhd" Line 39: Unit &lt;<arg fmt="%s" index="1">behavioral</arg>&gt; ignored due to previous errors.
 </msg>
 
 </messages>

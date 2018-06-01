@@ -1,0 +1,12 @@
+[Inputs]
+clk
+RST
+W
+=A_no[15:0]=
+=B_no[15:0]=
+=W_no[15:0]=
+=Data[15:0]=
+[Outputs]
+=QA[15:0]=
+=QB[15:0]=
+[BiDir]

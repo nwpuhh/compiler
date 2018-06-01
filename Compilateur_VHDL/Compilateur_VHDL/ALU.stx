@@ -4,15 +4,15 @@ Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 Parameter TMPDIR set to /home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.04 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.07 secs
  
 --> 
 Parameter xsthdpdir set to /home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/xst
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.04 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.07 secs
  
 --> 
 Reading design: ALU.prj
@@ -48,13 +48,13 @@ Parsing entity <ALU>.
 Parsing architecture <Behavioral> of entity <alu>.
 
 
-Total REAL time to Xst completion: 2.00 secs
-Total CPU time to Xst completion: 2.28 secs
+Total REAL time to Xst completion: 3.00 secs
+Total CPU time to Xst completion: 2.29 secs
  
 --> 
 
 
-Total memory usage is 302260 kilobytes
+Total memory usage is 302252 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    0 (   0 filtered)

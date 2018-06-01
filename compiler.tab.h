@@ -63,7 +63,17 @@ extern int yydebug;
     tSEMI = 273,
     tCOMMA = 274,
     tVAR = 275,
-    tRETURN = 276
+    tRETURN = 276,
+    tLESS = 277,
+    tGREATER = 278,
+    tNOT = 279,
+    tIF = 280,
+    tELSE = 281,
+    tAND = 282,
+    tOR = 283,
+    t2EQ = 284,
+    tNOTEQ = 285,
+    tIFX = 286
   };
 #endif
 
@@ -77,7 +87,7 @@ union YYSTYPE
 	int integer;
 	char* str;
 
-#line 81 "compiler.tab.h" /* yacc.c:1909  */
+#line 91 "compiler.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

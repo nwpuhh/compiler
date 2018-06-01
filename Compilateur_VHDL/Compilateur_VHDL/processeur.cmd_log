@@ -1,0 +1,5 @@
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.syr" 
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.syr" 
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.syr" 
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.syr" 
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.syr" 

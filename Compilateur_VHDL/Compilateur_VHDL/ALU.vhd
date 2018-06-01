@@ -33,7 +33,6 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 
 entity ALU is
     Port (
-			  clk : in STD_LOGIC;  --pour tester
 			  Ctrl_Alu: in STD_LOGIC_VECTOR(15 downto 0);
            A : in  STD_LOGIC_VECTOR (15 downto 0);
            B : in  STD_LOGIC_VECTOR (15 downto 0);

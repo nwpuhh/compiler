@@ -19,6 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_signed.ALL ;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -31,11 +32,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity bancRegistres is
     Port ( 
-	        clock : in STD_LOGIC;
+	        clk : in STD_LOGIC;
 			  RST : in STD_LOGIC;
-			  A_no : in  integer range 0 to 15;
-           B_no : in  integer range 0 to 15;
-           W_no : in  integer range 0 to 15;
+			  A_no : in  STD_LOGIC_VECTOR (3 downto 0);
+           B_no : in  STD_LOGIC_VECTOR (3 downto 0);
+           W_no : in  STD_LOGIC_VECTOR (3 downto 0);
            W : in  STD_LOGIC;
            Data : in  STD_LOGIC_VECTOR (15 downto 0);
            QA : out  STD_LOGIC_VECTOR (15 downto 0);
@@ -45,27 +46,27 @@ end bancRegistres;
 architecture Behavioral of bancRegistres is
 
 type registerFile is array(integer range<>) of STD_LOGIC_VECTOR(15 downto 0); 
-signal registers: registerFile(0 to 15);
+signal registers: registerFile(0 to 15) := (others => (others => '0'));
 signal W_temp : STD_LOGIC_VECTOR(15 downto 0);
 
 -- lecture asynchrone / ecriture synchrone / bypass asynchrone
 begin
-	process(clock)  --writer synchrone
+	process(clk)  --writer synchrone
 		begin
-			if(clock'event and clock='1') then
+			if(clk'event and clk='1') then
 				if(RST='0') then  --Should be reseted
 					registers <= (others => (others => '0'));
 				elsif (W = '1') then --should write
-						registers(W_no) <= Data;
+						registers(conv_integer(W_no)) <= Data;
 				end if;
 			end if;
 	end process;
 	
 	
 	QA <= Data when (W='1' and W_no=A_no)  else
-			registers(A_no);
+			registers(conv_integer(A_no));
 	QB <= Data when (W = '1' and W_no = B_no) else
-			registers(B_no);
+			registers(conv_integer(B_no));
 		
 	
 end Behavioral;

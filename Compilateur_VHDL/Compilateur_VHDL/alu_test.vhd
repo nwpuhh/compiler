@@ -41,7 +41,6 @@ ARCHITECTURE behavior OF alu_test IS
  
     COMPONENT ALU
     PORT(
-         clk : IN  std_logic;
          Ctrl_Alu : IN  std_logic_vector(15 downto 0);
          A : IN  std_logic_vector(15 downto 0);
          B : IN  std_logic_vector(15 downto 0);
@@ -68,7 +67,6 @@ BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: ALU PORT MAP (
-          clk => clk,
           Ctrl_Alu => Ctrl_Alu,
           A => A,
           B => B,

@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity pipeline is
-    Port ( clock : in  STD_LOGIC;
+    Port ( clk : in  STD_LOGIC;
            op : in  STD_LOGIC_VECTOR (15 downto 0);
            a : in  STD_LOGIC_VECTOR (15 downto 0);
            b : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -44,9 +44,9 @@ end pipeline;
 architecture Behavioral of pipeline is
 	
 begin
-	process (clock)
+	process (clk)
 		begin
-			if (clock'event and clock='1') then
+			if (clk'event and clk='1') then
 				opS <= op;
 				aS <= a;
 				bS <= b;

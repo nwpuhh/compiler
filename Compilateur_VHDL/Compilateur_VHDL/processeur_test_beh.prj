@@ -1,0 +1,6 @@
+vhdl work "pipeline.vhd"
+vhdl work "decodeur.vhd"
+vhdl work "bancRegistres.vhd"
+vhdl work "ALU.vhd"
+vhdl work "processeur.vhd"
+vhdl work "processeur_test.vhd"

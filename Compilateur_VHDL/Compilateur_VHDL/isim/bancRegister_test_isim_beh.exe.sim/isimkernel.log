@@ -2,12 +2,12 @@ Command line:
    bancRegister_test_isim_beh.exe
      -simmode  gui
      -simrunnum  0
-     -socket  45146
+     -socket  53592
 
-Tue May 29 11:50:13 2018
+Fri Jun  1 14:14:12 2018
 
 
- Elaboration Time: 0.02 sec
+ Elaboration Time: 0.01 sec
 
  Current Memory Usage: 203.686 Meg
 
@@ -20,9 +20,9 @@ Tue May 29 11:50:13 2018
  Total Traceable Variables  : 9
  Total Scalar Nets and Variables : 687
 
- Total Simulation Time: 0.02 sec
+ Total Simulation Time: 0.01 sec
 
  Current Memory Usage: 279.187 Meg
 
-Tue May 29 11:50:57 2018
+Fri Jun  1 14:14:26 2018
 

@@ -41,7 +41,7 @@ ARCHITECTURE behavior OF pipeline_test IS
  
     COMPONENT pipeline
     PORT(
-         clock : IN  std_logic;
+         clk : IN  std_logic;
          op : IN  std_logic_vector(15 downto 0);
          a : IN  std_logic_vector(15 downto 0);
          b : IN  std_logic_vector(15 downto 0);
@@ -55,7 +55,7 @@ ARCHITECTURE behavior OF pipeline_test IS
     
 
    --Inputs
-   signal clock : std_logic := '0';
+   signal clk : std_logic := '0';
    signal op : std_logic_vector(15 downto 0) := (others => '0');
    signal a : std_logic_vector(15 downto 0) := (others => '0');
    signal b : std_logic_vector(15 downto 0) := (others => '0');
@@ -74,7 +74,7 @@ BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: pipeline PORT MAP (
-          clock => clock,
+          clk => clk,
           op => op,
           a => a,
           b => b,
@@ -88,9 +88,9 @@ BEGIN
    -- Clock process definitions
    clock_process :process
    begin
-		clock <= '0';
+		clk <= '0';
 		wait for clock_period/2;
-		clock <= '1';
+		clk <= '1';
 		wait for clock_period/2;
    end process;
  
