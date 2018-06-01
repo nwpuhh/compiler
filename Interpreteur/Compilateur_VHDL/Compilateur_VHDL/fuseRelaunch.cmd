@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegister_test_isim_beh.exe" -prj "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegister_test_beh.prj" "work.bancRegister_test" 

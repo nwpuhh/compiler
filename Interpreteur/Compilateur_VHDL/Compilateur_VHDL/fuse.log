@@ -1,0 +1,22 @@
+Running: /usr/local/insa/Xilinx.ISE/13.4/ISE_DS/ISE/bin/lin64/unwrapped/fuse -relaunch -intstyle "ise" -incremental -lib "secureip" -o "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegister_test_isim_beh.exe" -prj "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegister_test_beh.prj" "work.bancRegister_test" 
+ISim O.87xd (signature 0x8ddf5b5d)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" into library work
+Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegister_test.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 94764 KB
+Fuse CPU Usage: 830 ms
+Compiling package standard
+Compiling package std_logic_1164
+Compiling architecture behavioral of entity bancRegistres [bancregistres_default]
+Compiling architecture behavior of entity bancregister_test
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 5 VHDL Units
+Built simulation executable /home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegister_test_isim_beh.exe
+Fuse Memory Usage: 660356 KB
+Fuse CPU Usage: 840 ms
+GCC CPU Usage: 90 ms
