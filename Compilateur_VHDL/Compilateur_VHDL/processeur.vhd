@@ -32,8 +32,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity processeur is
     Port ( ins : in  STD_LOGIC_VECTOR (31 downto 0);
            clk : in  STD_LOGIC ;
-			  dataIn : in STD_LOGIC_VECTOR (15 downto 0);
-			  dataOut : out STD_LOGIC_VECTOR (15 downto 0)); 
+			  data_di : in STD_LOGIC_VECTOR (15 downto 0);
+			  data_we : out STD_LOGIC ;
+			  data_a : out STD_LOGIC_VECTOR (15 downto 0); 
+			  data_do : out STD_LOGIC_VECTOR (15 downto 0));
 end processeur;
 
 architecture Behavioral of processeur is
@@ -129,10 +131,11 @@ architecture Behavioral of processeur is
 	--MUX
 			signal muxBR : STD_LOGIC_VECTOR (15 downto 0) := (others =>'0');
 			signal muxALU : STD_LOGIC_VECTOR (15 downto 0) := (others =>'0');
-			signal muxEX : STD_LOGIC_VECTOR (15 downto 0) := (others => '0') ;
 			signal muxMem : STD_LOGIC_VECTOR (15 downto 0) := (others => '0') ;
+			signal muxRe : STD_LOGIC_VECTOR (15 downto 0) := (others => '0') ;
 	
 	--LC
+			signal lcRE : STD_LOGIC := '0' ;
 			signal lcMEM : STD_LOGIC := '0' ;
 begin
 	-- instantiation
@@ -160,8 +163,8 @@ begin
           A_no => BLI(3 downto 0),
           B_no => CLI(3 downto 0),
           W_no => AMEM(3 downto 0),
-          W => lcMEM,
-          Data => BMEM,
+          W => lcRE,
+          Data => muxRE,
           QA => QA,
           QB => QB
       );
@@ -178,8 +181,8 @@ begin
       );
 	   ual: ALU PORT MAP (
           Ctrl_Alu => OPDI,
-          A => aDI,
-          B => BDI,
+          A => bDI,
+          B => cDI,
           flag => flag,
           S => S
       );
@@ -206,9 +209,22 @@ begin
           cS => cMem
       );
 		
-		muxBR <= BLI when (opDec = x"0006") ;
-		muxALU <= BDI when (opDec = x"0006") ;
-		lcMEM <= '1' when (opDec = x"0006") ;
+		muxBR <= BLI when (opLI = x"0006" or opLI = x"0007") else 
+					QA when (opLI = x"0005" or opLI = x"0001" or opLI = x"0002" or opLI = x"0003" or opLI = x"0004");
+		muxALU <= BDI when (opDI = x"0006" or opDI = x"0005" or opDI =x"0007") else
+					 S   when (opDI = x"0001" or opDI = x"0002" or opDI = x"0003" or opDI = x"0004");
+		lcRE <= '1' when (opMem = x"0006" or opMem = x"0005" or opMem = x"0001" or opMem = x"0002" or opMem = x"0003" or opMem = x"0004" or opMem = x"0007") else
+				   '0' ;
+		lcMEM <= '1' when (opEX = x"0007") else
+					'0' ;
+		muxMem <= aEX when (opEX = x"0008") else
+					 bEX when (opEX = x"0007") ;
+		muxRE <= data_di when (opMem = x"0007") else
+					BMem ;
+		
+		data_a <= muxMem;			
+		data_we <= lcMEM ;
+		data_do <= bEX;
 		
 		
 

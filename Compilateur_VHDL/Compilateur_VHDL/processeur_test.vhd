@@ -41,10 +41,12 @@ ARCHITECTURE behavior OF processeur_test IS
  
     COMPONENT processeur
     PORT(
-         ins : IN  std_logic_vector(31 downto 0);
-         clk : IN  std_logic;
-         dataIn : IN  std_logic_vector(15 downto 0);
-         dataOut : OUT  std_logic_vector(15 downto 0)
+         ins : in  STD_LOGIC_VECTOR (31 downto 0);
+           clk : in  STD_LOGIC ;
+			  data_di : in STD_LOGIC_VECTOR (15 downto 0);
+			  data_we : out STD_LOGIC ;
+			  data_a : out STD_LOGIC_VECTOR (15 downto 0); 
+			  data_do : out STD_LOGIC_VECTOR (15 downto 0)
         );
     END COMPONENT;
     
@@ -52,10 +54,12 @@ ARCHITECTURE behavior OF processeur_test IS
    --Inputs
    signal ins : std_logic_vector(31 downto 0) := (others => '0');
    signal clk : std_logic := '0';
-   signal dataIn : std_logic_vector(15 downto 0) := (others => '0');
+   signal data_di : std_logic_vector(15 downto 0) := (others => '0');
 
  	--Outputs
-   signal dataOut : std_logic_vector(15 downto 0);
+	signal data_we : std_logic := '0';
+   signal data_a : std_logic_vector(15 downto 0);
+	signal data_do : std_logic_vector(15 downto 0); 
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -66,8 +70,10 @@ BEGIN
    uut: processeur PORT MAP (
           ins => ins,
           clk => clk,
-          dataIn => dataIn,
-          dataOut => dataOut
+          data_di => data_di,
+          data_we => data_we,
+			 data_a => data_a,
+			 data_do => data_do
         );
 
    -- Clock process definitions
@@ -84,14 +90,33 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-      wait for 100 ns;	
-
-      wait for clk_period*10;
+      
 
       -- insert stimulus here	
 		ins <= x"06010203";
-		wait for 100ns;
-		ins <= x"06110302";
+		wait for 50ns;
+		ins <= x"06050302";
+		wait for 50ns;
+		ins <= x"05020100";
+		wait for 50ns;
+		ins <= x"05030500";
+		wait for 50ns;
+		ins <= x"01060301";
+		wait for 50ns;
+		ins <= x"01070205";
+		wait for 50ns;
+		ins <= x"02010203";
+		wait for 50ns;
+		ins <= x"03010706";
+		wait for 50ns;
+		ins <= x"03080702";
+		wait for 50ns;
+		ins <= x"07020001";
+		data_di <= x"0005";
+		wait for 50ns ;
+		ins <= x"08000109";
+		wait for 50ns ;
+		
 
       wait;
    end process;

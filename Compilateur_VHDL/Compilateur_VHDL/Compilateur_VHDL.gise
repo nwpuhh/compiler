@@ -22,6 +22,9 @@
   <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="Compilateur_VHDL.xise"/>
 
   <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name=".prj"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name=".stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name=".xst"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="ALU.prj"/>
     <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="ALU.stx"/>
     <file xil_pn:fileType="FILE_XST" xil_pn:name="ALU.xst"/>
@@ -102,6 +105,8 @@
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="processeur.stx"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="processeur.syr"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="processeur.xst"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="processeur_envsettings.html"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="processeur_summary.html"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="processeur_test_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="processeur_test_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="processeur_test_isim_beh.wdb"/>
@@ -124,11 +129,12 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1527863237" xil_pn:in_ck="-1510868078502799908" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1527863237">
+    <transform xil_pn:end_ts="1528115199" xil_pn:in_ck="-1510868078502799908" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1528115199">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
       <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="ALU.vhd"/>
@@ -154,7 +160,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1527863249" xil_pn:in_ck="-1510868078502799908" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1527863249">
+    <transform xil_pn:end_ts="1528115201" xil_pn:in_ck="-1510868078502799908" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1528115201">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
@@ -173,7 +179,7 @@
       <outfile xil_pn:name="processeur.vhd"/>
       <outfile xil_pn:name="processeur_test.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1527863251" xil_pn:in_ck="-1510868078502799908" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-536799372876765728" xil_pn:start_ts="1527863249">
+    <transform xil_pn:end_ts="1528115203" xil_pn:in_ck="-1510868078502799908" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-536799372876765728" xil_pn:start_ts="1528115201">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
@@ -188,7 +194,7 @@
       <outfile xil_pn:name="processeur_test_isim_beh.exe"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1527863251" xil_pn:in_ck="-1841049777625393900" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="4921322028246516301" xil_pn:start_ts="1527863251">
+    <transform xil_pn:end_ts="1528115203" xil_pn:in_ck="2664126182917778893" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="4921322028246516301" xil_pn:start_ts="1528115203">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
@@ -226,10 +232,12 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1527864670" xil_pn:in_ck="-6192508637493809110" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="2678212959766731315" xil_pn:start_ts="1527864665">
-      <status xil_pn:value="FailedRun"/>
+    <transform xil_pn:end_ts="1528115898" xil_pn:in_ck="-6192508637493809110" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="2678212959766731315" xil_pn:start_ts="1528115889">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
       <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
       <outfile xil_pn:name="pipeline.ngr"/>
@@ -237,6 +245,7 @@
       <outfile xil_pn:name="processeur.ngc"/>
       <outfile xil_pn:name="processeur.ngr"/>
       <outfile xil_pn:name="processeur.prj"/>
+      <outfile xil_pn:name="processeur.stx"/>
       <outfile xil_pn:name="processeur.syr"/>
       <outfile xil_pn:name="processeur.xst"/>
       <outfile xil_pn:name="processeur_test_beh.prj"/>

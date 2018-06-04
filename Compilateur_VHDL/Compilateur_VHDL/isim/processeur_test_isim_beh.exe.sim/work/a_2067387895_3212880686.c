@@ -22,10 +22,9 @@
 #define alloca _alloca
 #endif
 static const char *ng0 = "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd";
-extern char *IEEE_P_0774719531;
+extern char *IEEE_P_3620187407;
 
-unsigned char ieee_p_0774719531_sub_1306448836232530671_2162500114(char *, char *, char *, char *, char *);
-int ieee_p_0774719531_sub_5108929503364814004_2162500114(char *, char *, char *);
+int ieee_p_3620187407_sub_5109402382352621412_3965413181(char *, char *, char *);
 
 
 static void work_a_2067387895_3212880686_p_0(char *t0)
@@ -125,7 +124,7 @@ LAB13:    xsi_set_current_line(60, ng0);
     t2 = (t0 + 1672U);
     t8 = *((char **)t2);
     t2 = (t0 + 7624U);
-    t21 = ieee_p_0774719531_sub_5108929503364814004_2162500114(IEEE_P_0774719531, t8, t2);
+    t21 = ieee_p_3620187407_sub_5109402382352621412_3965413181(IEEE_P_3620187407, t8, t2);
     t22 = (t21 - 0);
     t12 = (t22 * 1);
     t15 = (16U * t12);
@@ -193,7 +192,7 @@ LAB8:    t16 = (t0 + 2472U);
     t16 = (t0 + 1352U);
     t18 = *((char **)t16);
     t16 = (t0 + 7592U);
-    t19 = ieee_p_0774719531_sub_5108929503364814004_2162500114(IEEE_P_0774719531, t18, t16);
+    t19 = ieee_p_3620187407_sub_5109402382352621412_3965413181(IEEE_P_3620187407, t18, t16);
     t20 = (t19 - 0);
     t21 = (t20 * 1);
     xsi_vhdl_check_range_of_index(0, 15, 1, t19);
@@ -229,7 +228,7 @@ LAB5:    t2 = (t0 + 1672U);
     t7 = (t0 + 1352U);
     t8 = *((char **)t7);
     t7 = (t0 + 7592U);
-    t9 = ieee_p_0774719531_sub_1306448836232530671_2162500114(IEEE_P_0774719531, t6, t2, t8, t7);
+    t9 = ieee_std_logic_unsigned_equal_stdv_stdv(IEEE_P_3620187407, t6, t2, t8, t7);
     t1 = t9;
     goto LAB7;
 
@@ -289,7 +288,7 @@ LAB8:    t16 = (t0 + 2472U);
     t16 = (t0 + 1512U);
     t18 = *((char **)t16);
     t16 = (t0 + 7608U);
-    t19 = ieee_p_0774719531_sub_5108929503364814004_2162500114(IEEE_P_0774719531, t18, t16);
+    t19 = ieee_p_3620187407_sub_5109402382352621412_3965413181(IEEE_P_3620187407, t18, t16);
     t20 = (t19 - 0);
     t21 = (t20 * 1);
     xsi_vhdl_check_range_of_index(0, 15, 1, t19);
@@ -325,7 +324,7 @@ LAB5:    t2 = (t0 + 1672U);
     t7 = (t0 + 1512U);
     t8 = *((char **)t7);
     t7 = (t0 + 7608U);
-    t9 = ieee_p_0774719531_sub_1306448836232530671_2162500114(IEEE_P_0774719531, t6, t2, t8, t7);
+    t9 = ieee_std_logic_unsigned_equal_stdv_stdv(IEEE_P_3620187407, t6, t2, t8, t7);
     t1 = t9;
     goto LAB7;
 
