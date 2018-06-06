@@ -191,7 +191,7 @@ begin
           op => opDI,
           a => aDI,
           b => muxALU,
-          c => muxALU,
+          c => cDI,
           opS => opEX,
           aS => aEX,
           bS => bEX,
@@ -210,12 +210,12 @@ begin
       );
 		
 		muxBR <= BLI when (opLI = x"0006" or opLI = x"0007") else 
-					QA when (opLI = x"0005" or opLI = x"0001" or opLI = x"0002" or opLI = x"0003" or opLI = x"0004");
-		muxALU <= BDI when (opDI = x"0006" or opDI = x"0005" or opDI =x"0007") else
+					QA when (opLI = x"0005" or opLI = x"0001" or opLI = x"0002" or opLI = x"0003" or opLI = x"0004" or opLI = x"0008");
+		muxALU <= BDI when (opDI = x"0006" or opDI = x"0005" or opDI =x"0007" or opDI = x"0008") else
 					 S   when (opDI = x"0001" or opDI = x"0002" or opDI = x"0003" or opDI = x"0004");
 		lcRE <= '1' when (opMem = x"0006" or opMem = x"0005" or opMem = x"0001" or opMem = x"0002" or opMem = x"0003" or opMem = x"0004" or opMem = x"0007") else
 				   '0' ;
-		lcMEM <= '1' when (opEX = x"0007") else
+		lcMEM <= '1' when (opEX = x"0008") else
 					'0' ;
 		muxMem <= aEX when (opEX = x"0008") else
 					 bEX when (opEX = x"0007") ;
@@ -224,7 +224,7 @@ begin
 		
 		data_a <= muxMem;			
 		data_we <= lcMEM ;
-		data_do <= bEX;
+		data_do <= cEX;
 		
 		
 

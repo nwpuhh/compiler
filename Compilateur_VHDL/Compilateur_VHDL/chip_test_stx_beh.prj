@@ -1,0 +1,8 @@
+vhdl isim_temp "pipeline.vhd"
+vhdl isim_temp "decodeur.vhd"
+vhdl isim_temp "bancRegistres.vhd"
+vhdl isim_temp "ALU.vhd"
+vhdl isim_temp "processeur.vhd"
+vhdl isim_temp "bram16.vhd"
+vhdl isim_temp "Chip.vhd"
+vhdl isim_temp "chip_test.vhd"

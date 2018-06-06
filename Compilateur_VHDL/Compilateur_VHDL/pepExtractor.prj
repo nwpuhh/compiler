@@ -1,1 +1,7 @@
+work	"ALU.vhd"
+work	"Chip.vhd"
 work	"bancRegistres.vhd"
+work	"bram16.vhd"
+work	"decodeur.vhd"
+work	"pipeline.vhd"
+work	"processeur.vhd"

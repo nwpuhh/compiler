@@ -1,0 +1,10 @@
+Command line:
+   chip_test_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  33782
+
+Wed Jun  6 17:33:05 2018
+
+
+ Elaboration Time: 0.01 sec

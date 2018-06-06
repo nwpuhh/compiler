@@ -1,4 +1,4 @@
-Running: /usr/local/insa/Xilinx.ISE/13.4/ISE_DS/ISE/bin/lin64/unwrapped/fuse -relaunch -intstyle "ise" -incremental -lib "secureip" -o "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur_test_isim_beh.exe" -prj "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur_test_beh.prj" "work.processeur_test" 
+Running: /usr/local/insa/Xilinx.ISE/13.4/ISE_DS/ISE/bin/lin64/unwrapped/fuse -relaunch -intstyle "ise" -incremental -lib "secureip" -o "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/chip_test_isim_beh.exe" -prj "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/chip_test_beh.prj" "work.chip_test" 
 ISim O.87xd (signature 0x8ddf5b5d)
 Number of CPUs detected in this system: 4
 Turning on mult-threading, number of parallel sub-compilation jobs: 8 
@@ -8,11 +8,13 @@ Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/decod
 Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bancRegistres.vhd" into library work
 Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/ALU.vhd" into library work
 Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur.vhd" into library work
-Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur_test.vhd" into library work
+Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/bram16.vhd" into library work
+Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.vhd" into library work
+Parsing VHDL file "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/chip_test.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 97816 KB
-Fuse CPU Usage: 890 ms
+Fuse Memory Usage: 97824 KB
+Fuse CPU Usage: 910 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package std_logic_arith
@@ -23,11 +25,13 @@ Compiling architecture behavioral of entity pipeline [pipeline_default]
 Compiling architecture behavioral of entity bancRegistres [bancregistres_default]
 Compiling architecture behavioral of entity ALU [alu_default]
 Compiling architecture behavioral of entity processeur [processeur_default]
-Compiling architecture behavior of entity processeur_test
+Compiling architecture behavioral of entity bram16 [bram16_default]
+Compiling architecture behavioral of entity Chip [chip_default]
+Compiling architecture behavior of entity chip_test
 Time Resolution for simulation is 1ps.
 Waiting for 1 sub-compilation(s) to finish...
-Compiled 16 VHDL Units
-Built simulation executable /home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur_test_isim_beh.exe
-Fuse Memory Usage: 673792 KB
-Fuse CPU Usage: 990 ms
-GCC CPU Usage: 140 ms
+Compiled 20 VHDL Units
+Built simulation executable /home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/chip_test_isim_beh.exe
+Fuse Memory Usage: 673884 KB
+Fuse CPU Usage: 1010 ms
+GCC CPU Usage: 70 ms

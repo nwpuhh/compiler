@@ -38,7 +38,8 @@ architecture Behavioral of Chip is
 
     COMPONENT processeur
     PORT(
-         clkP : IN  std_logic ;
+			ins : in  STD_LOGIC_VECTOR (31 downto 0);
+         clk : IN  std_logic ;
 		   data_di : in STD_LOGIC_VECTOR (15 downto 0);
 			data_we : out STD_LOGIC ;
 			data_a : out STD_LOGIC_VECTOR (15 downto 0); 
@@ -65,8 +66,9 @@ architecture Behavioral of Chip is
 			signal di : std_logic_vector(15 downto 0) := (others => '0');
 	 
 begin
-		proc: decodeur PORT MAP (
-          clkP => clk,
+		proc: processeur PORT MAP (
+			 ins => ins,
+          clk => clk,
           data_di  => di,
           data_we => data_we,
           data_a => data_a,

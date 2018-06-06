@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -lib "secureip" -o "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur_test_isim_beh.exe" -prj "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/processeur_test_beh.prj" "work.processeur_test" 
+-intstyle "ise" -incremental -lib "secureip" -o "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/chip_test_isim_beh.exe" -prj "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/chip_test_beh.prj" "work.chip_test" 

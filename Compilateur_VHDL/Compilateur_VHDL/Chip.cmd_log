@@ -1,0 +1,5 @@
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.syr" 
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.syr" 
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.syr" 
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.syr" 
+xst -intstyle ise -ifn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.xst" -ofn "/home/hhu/Compilateur/Compilateur_VHDL/Compilateur_VHDL/Chip.syr" 
