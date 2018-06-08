@@ -29,6 +29,7 @@
 	symbol_stack ts ;
 	table_ops operations;
 	int esp = 0 ;
+	int depth = 0;
 %}
 
 %union {
@@ -44,6 +45,7 @@
 %left tGREATER tLESS
 %left tADD tMIN
 %left tMUL tDIV
+%left tNOT
 %left tLEFTBRACKET tRIGHTBRACKET
 
 %nonassoc tIFX
@@ -51,7 +53,7 @@
 
 %type <str> tVAR tTYPE
 
-%type <integer> tINT
+%type <integer> tINT tIF
 
 
 %%
@@ -67,7 +69,7 @@ declaration :  tTYPE tVAR {
 // TODO : warning
 								exit(-1);
 							} else {
-								ts_new( &ts, esp++, $2, $1, 0);
+								ts_new( &ts, esp++, $2, $1, depth);
 								//print_stack(&ts);
 							}		
 						   }
@@ -91,7 +93,7 @@ newVar : tVAR { if(research_by_id(&ts,$1) != NULL){
 							exit(-1);
 						} else {
 							symbol_node * sp = top(&ts);
-							ts_new( &ts, esp++, $1, sp->element.type, 0);
+							ts_new( &ts, esp++, $1, sp->element.type, depth);
 							//print_stack(&ts);
 						}}
 
@@ -129,7 +131,8 @@ suiteparams :
 body : tLEFTBRACE expressions tRIGHTBRACE 
 ;
 
-expressions : expression tSEMI expressions 
+expressions : expression tSEMI expressions
+			| expression_if expressions 
 			| 
 ;
 expression : tVAR tEQ expression_alg {
@@ -138,8 +141,121 @@ expression : tVAR tEQ expression_alg {
 									  OPP3("STORE",research_by_id(&ts,$1)->element.address,0);}
 			| declarationVar 
 			| call 
-			| expression_if
+
 ;
+
+expression_condition :  expression_alg
+							{ 	/*For guaranting the expression_cond is 0 or 1*/
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								OPP3("AFC", 1, 0); /* 0 for R1*/
+								OPP4("EQL", 0, 0, 1);  /* if the value == 0, R0 = 1; value != 0 R0 = 0*/
+								OPP3("AFC", 1, 0);	/* renew the R1 = 0 */
+								OPP4("EQL", 0, 0, 1);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address,0);
+								printf("expression_alg only\n");}
+				| tLEFTBRACKET expression_condition tRIGHTBRACKET
+							{printf("expression_alg only\n");}
+				| expression_alg t2EQ expression_alg
+							{
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								esp--;
+								OPP3("LOAD", 1, pop(&ts).element.address);
+								esp--;
+								OPP4("EQU", 0, 0, 1);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address,0);
+								printf("expression_alg == exp\n");}
+				| tNOT expression_condition
+							{
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								esp--;
+								OPP3("AFC", 1, 0);
+								OPP4("EQL", 0, 0, 1);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address,0);
+								printf("not exp_condition\n");}
+				| expression_alg tGREATER tEQ expression_alg
+							{
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								esp--;
+								OPP3("LOAD", 1, pop(&ts).element.address);
+								esp--;
+								OPP4("SUPE", 0, 1, 0);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address, 0);
+								printf("expression_alg >= expression_alg\n");}
+				| expression_alg tLESS tEQ expression_alg
+							{
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								esp--;
+								OPP3("LOAD", 1, pop(&ts).element.address); /* R1 is the first*/
+								esp--;
+								OPP4("INFE", 0, 1, 0);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address, 0);
+								printf("expression_alg <= expression_alg\n");}
+				| expression_alg tGREATER expression_alg
+							{
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								esp--;
+								OPP3("LOAD", 1, pop(&ts).element.address);
+								esp--;
+								OPP4("SUP", 0, 1, 0);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address, 0);
+								printf("expression_alg > expression_alg\n");}
+				| expression_alg tLESS expression_alg
+							{
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								esp--;
+								OPP3("LOAD", 1, pop(&ts).element.address); /* R1 is the first*/
+								esp--;
+								OPP4("INF", 0, 1, 0);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address, 0);
+								printf("expression_alg < expression_alg\n");}
+				| expression_alg tNOTEQ expression_alg
+							{
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								esp--;
+								OPP3("LOAD", 1, pop(&ts).element.address); /* R1 is the first*/
+								esp--;
+								OPP4("EQL", 0, 0, 1);
+								OPP3("AFC", 1, 0);
+								OPP4("EQL", 0, 0, 1);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address, 0);
+								printf("expression_alg != expression_alg\n");}
+				| expression_condition tAND expression_condition
+							{
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								esp--;
+								OPP3("LOAD", 1, pop(&ts).element.address);
+								esp--;
+								OPP4("ADD", 0, 0, 1);
+								OPP3("AFC", 1, 2);
+								OPP4("EQL", 0, 0, 1);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address,0);
+								printf("expression_cond && expression_cond\n");}
+				| expression_condition tOR expression_condition
+							{
+								OPP3("LOAD", 0, pop(&ts).element.address);
+								esp--;
+								OPP3("LOAD", 1, pop(&ts).element.address);
+								esp--;
+								OPP4("ADD", 0, 0, 1); /* if R0 = R1 + R0 => 0 -> should be 0 as false*/
+								OPP3("AFC", 1, 0);
+								OPP4("EQL", 0, 0, 1);									
+								OPP3("AFC", 1, 0);
+								OPP4("EQL", 0, 0, 1);
+								symbol s = ts_new_tmp(&ts,esp++);
+								OPP3("STORE",s.address,0);
+								printf("expression_cond || expression_cond\n");}
+				;	
+	
+
 expression_alg :  expression_alg tADD expression_alg {
 					OPP3("LOAD",0,pop(&ts).element.address);
 			 		esp--;
@@ -188,27 +304,24 @@ call : tVAR tLEFTBRACKET params tRIGHTBRACKET	{
 									  				OPP2("PRINTF",0);}
 ;	
 
-expression_if: tIF tLEFTBRACKET expression_condition tRIGHTBRACKET body_if %prec tIFX
-		| tIF tLEFTBRACKET expression_condition tRIGHTBRACKET body_if tELSE body_if
+expression_if: tIF tLEFTBRACKET expression_condition tRIGHTBRACKET body_if tELSE body_if
+					{ depth--;
+					  printf("If with else\n"); }
+			 | tIF tLEFTBRACKET expression_condition tRIGHTBRACKET body_if %prec tIFX
+					{
+						depth--;
+						printf("Only the if\n");
+					}
 		;
 
-body_if: tLEFTBRACE expressions tRIGHTBRACE
-		| expressions
+body_if: tLEFTBRACE {printf("Heloo\n");} expressions tRIGHTBRACE
+			 { printf("If with the brace\n"); }
+		| expression tSEMI
+			{ printf("If without brace\n"); }
+		| expression_if
+			{ printf("If statement with if\n"); }
 		;
 
-expression_condition :  expression_alg
-				| tLEFTBRACKET expression_alg tRIGHTBRACKET
-				| expression_alg t2EQ expression_alg
-				| tNOT expression_condition
-				| expression_alg tGREATER tEQ expression_alg
-				| expression_alg tLESS tEQ expression_alg
-				| expression_alg tGREATER expression_alg
-				| expression_alg tLESS expression_alg
-				| expression_alg tNOTEQ expression_alg
-				| expression_condition tAND expression_condition
-				| expression_condition tOR expression_condition
-				;	
-	
 
 %%
 int main(){

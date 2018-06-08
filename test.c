@@ -7,4 +7,9 @@ int main(){
 	printf(i);
 	r=(i+j)*(i+k/j);
 	printf(r);
+	
+		if(i+j) 
+			{int p = 3;}
+	int m = 0 ;
+ 
 }

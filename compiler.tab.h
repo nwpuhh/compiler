@@ -82,7 +82,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 34 "compiler.y" /* yacc.c:1909  */
+#line 35 "compiler.y" /* yacc.c:1909  */
 
 	int integer;
 	char* str;

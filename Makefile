@@ -1,7 +1,7 @@
 all:compiler
 
 lex.yy.c:compiler.l
-	./flex compiler.l
+	./flex compiler.l 
 
 compiler.tab.c: compiler.y
 	./bison/bin/bison -d -v compiler.y
