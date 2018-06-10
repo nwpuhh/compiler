@@ -9,7 +9,10 @@ int main(){
 	printf(r);
 	
 		if(i+j) 
-			{int p = 3;}
+			if(0)
+				int p = 0;
+			else
+				i = 4;
 	int m = 0 ;
  
 }

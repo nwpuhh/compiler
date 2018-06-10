@@ -53,8 +53,7 @@
 
 %type <str> tVAR tTYPE
 
-%type <integer> tINT tIF
-
+%type <integer> tINT tIF startIF
 
 %%
 
@@ -64,9 +63,9 @@ S : 					{print_stack(&ts);
 	| declarationVar S 
 	| declarationFun S 
 ;
+
 declaration :  tTYPE tVAR {
 							if(research_by_id(&ts,$2) != NULL){
-// TODO : warning
 								exit(-1);
 							} else {
 								ts_new( &ts, esp++, $2, $1, depth);
@@ -82,6 +81,7 @@ afcInDec :
 							 	    OPP3("LOAD", 0,sn.element.address);
 							   	    OPP3("STORE",research_by_id(&ts,top(&ts)->element.id)->element.address,0);}	
 ;
+
 declarationVar : declaration afcInDec var 
 ;
 
@@ -95,7 +95,8 @@ newVar : tVAR { if(research_by_id(&ts,$1) != NULL){
 							symbol_node * sp = top(&ts);
 							ts_new( &ts, esp++, $1, sp->element.type, depth);
 							//print_stack(&ts);
-						}}
+						}
+			  }
 
 ;
 value : tINT {symbol s = ts_new_tmp(&ts, esp++);
@@ -304,17 +305,29 @@ call : tVAR tLEFTBRACKET params tRIGHTBRACKET	{
 									  				OPP2("PRINTF",0);}
 ;	
 
-expression_if: tIF tLEFTBRACKET expression_condition tRIGHTBRACKET body_if tELSE body_if
-					{ depth--;
-					  printf("If with else\n"); }
-			 | tIF tLEFTBRACKET expression_condition tRIGHTBRACKET body_if %prec tIFX
+expression_if: startIF body_if tELSE body_if
+					{ 
+						operations.table[$1].a = operations.len;
+						depth--;
+						printf("If with else\n"); }
+			 | startIF body_if %prec tIFX
 					{
+						operations.table[$1].a = operations.len;
 						depth--;
 						printf("Only the if\n");
 					}
 		;
 
-body_if: tLEFTBRACE {printf("Heloo\n");} expressions tRIGHTBRACE
+startIF: tIF tLEFTBRACKET expression_condition tRIGHTBRACKET
+		{
+			depth++;
+			OPP3("LOAD", 0, pop(&ts).element.address);
+			OPP3("JMPC", -1, 0);
+			$1 = operations.len - 1;
+			$$ = $1;
+		} ;
+
+body_if: tLEFTBRACE expressions tRIGHTBRACE
 			 { printf("If with the brace\n"); }
 		| expression tSEMI
 			{ printf("If without brace\n"); }
@@ -329,3 +342,6 @@ int main(){
 	init_operations(&operations);
 	yyparse();
 }
+
+void yyerror(char * s)
+{ fprintf(stderr, "%s\n", s); }

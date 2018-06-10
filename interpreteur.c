@@ -29,14 +29,15 @@ int add_op(table_ops * operations, char * op, int a, int b, int c, int nbParam){
 void print_ops(const table_ops operations){
 		int i ;
 		operation OP ;
+		printf("The assembler of the program\n");
 		for (i = 0 ; i < operations.len ; i++){
 			OP = operations.table[i] ;
 			if(OP.nbParam == 1)
-				printf("%s %d\n",OP.op,OP.a); 
+				printf("%d %s %d\n", i, OP.op,OP.a); 
 			else if(OP.nbParam == 2)
-				printf("%s %d %d\n", OP.op, OP.a, OP.b);
+				printf("%d %s %d %d\n", i, OP.op, OP.a, OP.b);
 			else if (OP.nbParam == 3)
-				printf("%s %d %d %d\n", OP.op, OP.a, OP.b, OP.c);
+				printf("%d %s %d %d %d\n", i, OP.op, OP.a, OP.b, OP.c);
 		}
 }
 
