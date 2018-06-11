@@ -12,7 +12,7 @@
 "AFC"	return tAFC;
 "LOAD"	return tLOAD;
 "STORE"	return tSTORE;
-"EQU"	return tEQU;
+"EQL"	return tEQL;
 "INF" 	return tINF;
 "INFE"	return tINFE;
 "SUP"	return tSUP;

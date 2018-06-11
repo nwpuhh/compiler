@@ -116,7 +116,7 @@ extern int yydebug;
     tAFC = 263,
     tLOAD = 264,
     tSTORE = 265,
-    tEQU = 266,
+    tEQL = 266,
     tINF = 267,
     tINFE = 268,
     tSUP = 269,
@@ -464,7 +464,7 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "tADD", "tMUL", "tSOU", "tDIV", "tCOP",
-  "tAFC", "tLOAD", "tSTORE", "tEQU", "tINF", "tINFE", "tSUP", "tSUPE",
+  "tAFC", "tLOAD", "tSTORE", "tEQL", "tINF", "tINFE", "tSUP", "tSUPE",
   "tJMP", "tJMPC", "tPARAM", "tPRINTF", "$accept", "S", "operation", YY_NULLPTR
 };
 #endif

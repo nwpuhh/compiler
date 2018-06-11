@@ -13,7 +13,7 @@ Grammaire
     8          | tAFC tPARAM tPARAM
     9          | tLOAD tPARAM tPARAM
    10          | tSTORE tPARAM tPARAM
-   11          | tEQU tPARAM tPARAM tPARAM
+   11          | tEQL tPARAM tPARAM tPARAM
    12          | tINF tPARAM tPARAM tPARAM
    13          | tINFE tPARAM tPARAM tPARAM
    14          | tSUP tPARAM tPARAM tPARAM
@@ -35,7 +35,7 @@ tCOP (262) 7
 tAFC (263) 8
 tLOAD (264) 9
 tSTORE (265) 10
-tEQU (266) 11
+tEQL (266) 11
 tINF (267) 12
 tINFE (268) 13
 tSUP (269) 14
@@ -69,7 +69,7 @@ operation (22)
     tAFC     décalage et aller à l'état 6
     tLOAD    décalage et aller à l'état 7
     tSTORE   décalage et aller à l'état 8
-    tEQU     décalage et aller à l'état 9
+    tEQL     décalage et aller à l'état 9
     tINF     décalage et aller à l'état 10
     tINFE    décalage et aller à l'état 11
     tSUP     décalage et aller à l'état 12
@@ -142,7 +142,7 @@ operation (22)
 
 État 9
 
-   11 operation: tEQU . tPARAM tPARAM tPARAM
+   11 operation: tEQL . tPARAM tPARAM tPARAM
 
     tPARAM  décalage et aller à l'état 27
 
@@ -215,7 +215,7 @@ operation (22)
     tAFC     décalage et aller à l'état 6
     tLOAD    décalage et aller à l'état 7
     tSTORE   décalage et aller à l'état 8
-    tEQU     décalage et aller à l'état 9
+    tEQL     décalage et aller à l'état 9
     tINF     décalage et aller à l'état 10
     tINFE    décalage et aller à l'état 11
     tSUP     décalage et aller à l'état 12
@@ -288,7 +288,7 @@ operation (22)
 
 État 27
 
-   11 operation: tEQU tPARAM . tPARAM tPARAM
+   11 operation: tEQL tPARAM . tPARAM tPARAM
 
     tPARAM  décalage et aller à l'état 45
 
@@ -414,7 +414,7 @@ operation (22)
 
 État 45
 
-   11 operation: tEQU tPARAM tPARAM . tPARAM
+   11 operation: tEQL tPARAM tPARAM . tPARAM
 
     tPARAM  décalage et aller à l'état 55
 
@@ -484,7 +484,7 @@ operation (22)
 
 État 55
 
-   11 operation: tEQU tPARAM tPARAM tPARAM .
+   11 operation: tEQL tPARAM tPARAM tPARAM .
 
     $défaut  réduction par utilisation de la règle 11 (operation)
 

@@ -53,7 +53,7 @@ extern int yydebug;
     tAFC = 263,
     tLOAD = 264,
     tSTORE = 265,
-    tEQU = 266,
+    tEQL = 266,
     tINF = 267,
     tINFE = 268,
     tSUP = 269,

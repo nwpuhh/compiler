@@ -412,7 +412,7 @@ static const flex_int16_t yy_base[55] =
     {   0,
         0,    0,   67,   68,   22,   61,   19,   49,   53,   45,
        47,   47,   44,   37,   39,   12,   28,   52,   48,   48,
-       37,   30,   30,   41,   33,   43,   35,   36,   24,   29,
+       37,   30,   39,   41,   33,   43,   35,   36,   24,   29,
        27,   68,   68,   68,   68,   68,   34,   35,   33,   68,
        25,   68,   20,   29,   68,   68,   68,   16,   27,   68,
        25,   68,   68,   68
@@ -796,7 +796,7 @@ return tSTORE;
 case 9:
 YY_RULE_SETUP
 #line 15 "interpreteur.l"
-return tEQU;
+return tEQL;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP

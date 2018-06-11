@@ -13,7 +13,7 @@
 	int integer;
 }
 
-%token tADD tMUL tSOU tDIV tCOP tAFC tLOAD tSTORE tEQU tINF tINFE tSUP tSUPE tJMP tJMPC tPARAM tPRINTF;
+%token tADD tMUL tSOU tDIV tCOP tAFC tLOAD tSTORE tEQL tINF tINFE tSUP tSUPE tJMP tJMPC tPARAM tPRINTF;
 
 
 %type <integer> tPARAM
@@ -81,7 +81,7 @@ operation :   tADD tPARAM tPARAM tPARAM {
 												printf("error bad register\n");
 											}
 										}
-			| tEQU tPARAM tPARAM tPARAM {
+			| tEQL tPARAM tPARAM tPARAM {
 											if($2 < NBREG & $3 < NBREG & $4 < NBREG){
 												if(reg[$3] == reg[$4])
 													reg[$2] = 1;
@@ -132,7 +132,7 @@ operation :   tADD tPARAM tPARAM tPARAM {
 											}
 										}
 			| tJMP tPARAM
-			| tJMPC tPARAM tPARAM
+			| tJMPC tPARAM tPARAM		
 
 			| tPRINTF tPARAM 			{
 											if($2 < NBREG)
